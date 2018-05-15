@@ -1,5 +1,7 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Panel;
 
@@ -11,10 +13,12 @@ public class Main {
 	
 	JFrame frame = new JFrame();
 	
+	Draw draw = new Draw();
+	
 	Panel game = new Panel();
 
 	Container south = new Container();
-	
+	Container east = new Container();
 	Container easts = new Container();
 	Container centers = new Container();
 	Container wests = new Container();
@@ -23,16 +27,17 @@ public class Main {
 	JTextField playerTwo = new JTextField("Player Two");
 	
 	JButton twoPlayer = new JButton("2 Player");
-	JButton vsAi = new JButton("Ai");
+	JButton vsAi = new JButton("Computer");
 	JButton start = new JButton("Start");
 	JButton end = new JButton("End");
 	JButton reset = new JButton("Reset");
+	JButton info = new JButton("Welcome to Checkers. Select your Preferences.");
 	
 	public Main() {
 		frame.setSize(1000,1200);
 		frame.setLayout(new BorderLayout());
 		
-		frame.add(game, BorderLayout.CENTER);
+		frame.add(draw, BorderLayout.CENTER);
 		
 		south.setLayout(new BorderLayout());
 		south.add(easts, BorderLayout.EAST);
@@ -50,13 +55,20 @@ public class Main {
 		easts.add(end);
 		easts.add(reset);
 		
+		frame.add(info, BorderLayout.EAST);
+		
 		south.add(centers, BorderLayout.CENTER);
 		south.add(wests, BorderLayout.WEST);
 		frame.add(south, BorderLayout.SOUTH);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+		
+		frame.repaint();
+		
+		
 	}
+	
 
 	public static void main(String[] args) {
 		new Main();
