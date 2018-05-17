@@ -9,17 +9,17 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Main implements MouseListener{
 	
 	JFrame frame = new JFrame();
 	
-	boolean[][] cells = new boolean[7][7];
-	
 	Draw draw = new Draw();
-	
-	//Panel game = new Panel();
+
+	boolean[][] cells = new boolean[7][7];
 
 	Container south = new Container();
 	Container east = new Container();
@@ -27,8 +27,8 @@ public class Main implements MouseListener{
 	Container centers = new Container();
 	Container wests = new Container();
 	
-	JTextField playerOne = new JTextField("Player One");
-	JTextField playerTwo = new JTextField("Player Two");
+	JLabel playerOne = new JLabel("Player One");
+	JLabel playerTwo= new JLabel("Player Two");
 	
 	JButton twoPlayer = new JButton("2 Player");
 	JButton vsAi = new JButton("Computer");
@@ -38,7 +38,7 @@ public class Main implements MouseListener{
 	JButton info = new JButton("Welcome to Checkers. Select your Preferences.");
 	
 	public Main() {
-		frame.setSize(1000,1200);
+		frame.setSize(1000,800);
 		frame.setLayout(new BorderLayout());
 		
 		frame.add(draw, BorderLayout.CENTER);
@@ -105,17 +105,15 @@ public class Main implements MouseListener{
 		double width = 70;
 
 		double height = 70;
-		if (event.getX() <= 560 &&) {
+		if (event.getX() <= 560 && event.getY() <= 560) {
 			int column = Math.min(cells[0].length, (int)((event.getX() - 30)/ width));
+			int row = Math.min(cells.length , (int)((event.getY() - 30)/ height));
+			System.out.println(column + "," + row);
+			frame.repaint();
 		}
 		else {
 			return;
-
-
-		int row = Math.min(cells.length , (int)((event.getY() - 30)/ height));
-		System.out.println(column + "," + row);
-		cells[row][column] = !cells[row][column];
-		frame.repaint();
+		}
 	}
 
 	public static void main(String[] args) {
