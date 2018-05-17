@@ -15,7 +15,7 @@ public class Main implements MouseListener{
 	
 	JFrame frame = new JFrame();
 	
-	boolean[][] cells = new boolean[8][8];
+	boolean[][] cells = new boolean[7][7];
 	
 	Draw draw = new Draw();
 	
@@ -105,8 +105,13 @@ public class Main implements MouseListener{
 		double width = 70;
 
 		double height = 70;
+		if (event.getX() <= 560 &&) {
+			int column = Math.min(cells[0].length, (int)((event.getX() - 30)/ width));
+		}
+		else {
+			return;
 
-		int column = Math.min(cells[0].length, (int)((event.getX() - 30)/ width));
+
 		int row = Math.min(cells.length , (int)((event.getY() - 30)/ height));
 		System.out.println(column + "," + row);
 		cells[row][column] = !cells[row][column];
