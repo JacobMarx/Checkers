@@ -5,13 +5,14 @@ import java.awt.Panel;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Main {
 	
 	JFrame frame = new JFrame();
 	
-	Panel game = new Panel();
+	Draw game = new Draw();
 
 	Container south = new Container();
 	

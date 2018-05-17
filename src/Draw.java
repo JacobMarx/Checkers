@@ -1,13 +1,10 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
+
 import javax.swing.JPanel;
 
 public class Draw extends JPanel{
-
-	public Draw() {
-		super();
-	}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
