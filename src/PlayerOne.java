@@ -2,12 +2,12 @@ import java.awt.Color;
 
 public class PlayerOne extends CPieces {
 
-	int[] piecesrows = new int[11];
-	int[] piecescolumns = new int[11];
+	int[] piecesrows = new int[12];
+	int[] piecescolumns = new int[12];
 	
 	public void PlayerOne() {
 		
-		for (int i = 0; i < piecesrows.length; i ++) {
+		for (int i = 0; i < piecesrows.length -1; i ++) {
 			if (i >= 0 && i <= 3) {
 				piecesrows[i] = 0;
 			}
@@ -19,7 +19,7 @@ public class PlayerOne extends CPieces {
 			}
 		
 		}
-		for (int j = 0; j < piecescolumns.length; j++) {
+		for (int j = 0; j < piecescolumns.length -1; j++) {
 			if (j >= 0 && j <= 3) {
 				piecescolumns[j] = 2 * j + 1;
 			}
@@ -31,14 +31,22 @@ public class PlayerOne extends CPieces {
 			}
 		}
 		
+		for (int i = 0; i < piecesrows.length -1; i++) {
+			piecesrows[i] = x;
+		}
+		
+		for (int i = 0; i < piecescolumns.length -1; i++) {
+			piecescolumns[i] = y;
+		}
+		
 	}
 	
-	public int getPOnex() {
-		return x;
+	int getPOnex(int row) {
+		return piecesrows[row];
 	}
 	
-	public int getPOney() {
-		return y;
+	int getPOney(int column) {
+		return piecescolumns[column];
 	}
 	
 }
