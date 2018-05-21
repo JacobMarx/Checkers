@@ -28,8 +28,16 @@ public class Draw extends JPanel{
 				g.fillRect(a, b, 70, 70);
 			}
 		}
-		
+	
 		//top game pieces
+		for (int l = 0; l < 12; l++) {
+			System.out.println(l);
+		    g.setColor(Color.YELLOW);
+			g.fillOval((PlayerOne.getPOney(l) * 70) + 45, (PlayerOne.getPOnex(l) * 70) + 45, 40, 40);
+		}
+
+		
+		/*
 		for (int a = 30; a < 550; a = a + 140) {
 			for (int b = 100; b <=100; b = b + 140) {
 				g.setColor(Color.YELLOW);
@@ -42,6 +50,7 @@ public class Draw extends JPanel{
 				g.fillOval(a + 15, b + 15, 40, 40);
 			}
 		}
+		*/
 		
 		//bottom game pieces
 		for (int a = 30; a < 550; a = a + 140) {
