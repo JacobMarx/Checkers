@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 public class Main implements MouseListener{
 	
 	JFrame frame = new JFrame();
-
+	
 	Draw draw = new Draw();
 
 	boolean[][] cells = new boolean[7][7];
@@ -105,12 +105,15 @@ public class Main implements MouseListener{
 		double width = 70;
 
 		double height = 70;
-
-		int column = Math.min(cells[0].length, (int)((event.getX() - 30)/ width));
-		int row = Math.min(cells.length , (int)((event.getY() - 30)/ height));
-		System.out.println(column + "," + row);
-		cells[row][column] = !cells[row][column];
-		frame.repaint();
+		if (event.getX() <= 560 && event.getY() <= 560) {
+			int column = Math.min(cells[0].length, (int)((event.getX() - 30)/ width));
+			int row = Math.min(cells.length , (int)((event.getY() - 30)/ height));
+			System.out.println(column + "," + row);
+			frame.repaint();
+		}
+		else {
+			return;
+		}
 	}
 
 	public static void main(String[] args) {
