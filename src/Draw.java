@@ -1,8 +1,11 @@
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Stroke;
 
-
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 public class Draw extends JPanel{
 	
@@ -54,7 +57,31 @@ public class Draw extends JPanel{
 			}
 		}
 		
-	}
+		if (Main.cellColor == true) {
+			g.setColor(Color.GREEN);
+			g.drawRect((Main.column * 70) + 30, (Main.row * 70) + 30, 70, 70);
+			if ((Main.column + 1) <= 7 && (Main.column + 1) >= 0
+					&& (Main.row + 1) <= 7 && (Main.row + 1) >= 0) {
+				g.setColor(Color.PINK);
+				g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row + 1) * 70) + 30, 70, 70);
+			}
+			if ((Main.column + 1) <= 7 && (Main.column + 1) >= 0
+					&& (Main.row - 1) <= 7 && (Main.row - 1) >= 0) {
+				g.setColor(Color.PINK);
+				g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row - 1) * 70) + 30, 70, 70);
+			}
+			if ((Main.column - 1) <= 7 && (Main.column - 1) >= 0
+					&& (Main.row - 1) <= 7 && (Main.row - 1) >= 0) {
+				g.setColor(Color.PINK);
+				g.drawRect(((Main.column - 1) * 70) + 30, ((Main.row - 1) * 70) + 30, 70, 70);
+			}
+			if ((Main.column - 1) <= 7 && (Main.column - 1) >= 0
+					&& (Main.row + 1) <= 7 && (Main.row + 1) >= 0) {
+				g.setColor(Color.PINK);
+				g.drawRect(((Main.column - 1) * 70) + 30, ((Main.row + 1) * 70) + 30, 70, 70);
+			}
+		}
 		
+	}
 
 }
