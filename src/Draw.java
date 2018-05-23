@@ -72,32 +72,32 @@ public class Draw extends JPanel{
 			g.drawRect((Main.column * 70) + 30, (Main.row * 70) + 30, 70, 70);
 			g.drawRect((Main.column * 70) + 30, (Main.row * 70) + 30, 69, 69);
 			g.drawRect((Main.column * 70) + 30, (Main.row * 70) + 30, 68, 68);
-			if ((Main.column + 1) <= 7 && (Main.column + 1) >= 0
-					&& (Main.row + 1) <= 7 && (Main.row + 1) >= 0) {
+			
+			if (Main.forwardRight == true) {
 				g.setColor(Color.BLUE);
 				g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row + 1) * 70) + 30, 70, 70);
 				g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row + 1) * 70) + 30, 69, 69);
 				g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row + 1) * 70) + 30, 68, 68);
 			}
-			if ((Main.column + 1) <= 7 && (Main.column + 1) >= 0
-					&& (Main.row - 1) <= 7 && (Main.row - 1) >= 0) {
+			if (Main.forwardLeft == true) {
 				g.setColor(Color.BLUE);
 				g.drawRect(((Main.column - 1) * 70) + 30, ((Main.row + 1) * 70) + 30, 70, 70);
 				g.drawRect(((Main.column - 1) * 70) + 30, ((Main.row + 1) * 70) + 30, 69, 69);
 				g.drawRect(((Main.column - 1) * 70) + 30, ((Main.row + 1) * 70) + 30, 68, 68);
 			}
-			/*
-			if ((Main.column - 1) <= 7 && (Main.column - 1) >= 0
-					&& (Main.row - 1) <= 7 && (Main.row - 1) >= 0) {
+			if (Main.twoForwardLeft == true) {
 				g.setColor(Color.PINK);
 				g.drawRect(((Main.column - 1) * 70) + 30, ((Main.row - 1) * 70) + 30, 70, 70);
+				g.drawRect(((Main.column - 1) * 70) + 30, ((Main.row - 1) * 70) + 30, 69, 69);
+				g.drawRect(((Main.column - 1) * 70) + 30, ((Main.row - 1) * 70) + 30, 68, 68);
 			}
-			if ((Main.column - 1) <= 7 && (Main.column - 1) >= 0
-					&& (Main.row + 1) <= 7 && (Main.row + 1) >= 0) {
+			if (Main.twoForwardRight == true) {
 				g.setColor(Color.PINK);
 				g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row - 1) * 70) + 30, 70, 70);
+				g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row - 1) * 70) + 30, 69, 69);
+				g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row - 1) * 70) + 30, 68, 68);
 			}
-			*/
+			
 		}
 		
 	}

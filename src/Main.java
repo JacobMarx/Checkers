@@ -18,6 +18,10 @@ import javax.swing.JTextField;
 public class Main implements MouseListener, ActionListener{
 	
 	public static boolean cellColor = false;
+	public static boolean forwardRight = false;
+	public static boolean forwardLeft = false;
+	public static boolean twoForwardRight = false;
+	public static boolean twoForwardLeft = false;
 	public static int column;
 	public static int row;
 
@@ -123,27 +127,40 @@ public class Main implements MouseListener, ActionListener{
 			row = Math.min(cells.length , (int)((event.getY() - 30)/ height));
 			System.out.println(cells[column][row]);
 			//frame.repaint();
-			if ( (cells[column][row] == 1) || (cells[column][row] == 2)
-					/*(column == 0 && row == 1) || (column == 0 && row == 3) || (column == 0 && row == 5) || (column == 0 && row == 7)
-					|| (column == 1 && row == 0) ||(column == 1 && row == 2) ||(column == 1 && row == 4) ||(column == 1 && row == 6)
-					|| (column == 2 && row == 1) ||(column == 2 && row == 3) ||(column == 2 && row == 5) ||(column == 2 && row == 7)
-					|| (column == 3 && row == 0) ||(column == 3 && row == 2) ||(column == 3 && row == 4) ||(column == 3 && row == 6)
-					|| (column == 4 && row == 1) ||(column == 4 && row == 3) ||(column == 4 && row == 5) ||(column == 4 && row == 7)
-					|| (column == 5 && row == 0) ||(column == 5 && row == 2) ||(column == 5 && row == 4) ||(column == 5 && row == 6)
-					|| (column == 6 && row == 1) ||(column == 6 && row == 3) ||(column == 6 && row == 5) ||(column == 6 && row == 7)
-					|| (column == 7 && row == 0) ||(column == 7 && row == 2) ||(column == 7 && row == 4) ||(column == 7 && row == 6)) */ ){
-				if (playerMove == 1) {
-					cellColor = true;
-					playerMove = 2;
-					frame.repaint();
-					return;
+			if ( (cells[column][row] == 1) || (cells[column][row] == 2)){
+				if (playerMove == 1 && cells[column][row] == 1) {
+					if (((Main.column + 1) <= 7 && (Main.column + 1) >= 0 && (Main.row + 1) <= 7 && (Main.row + 1) >= 0) &&
+						 ((Main.column - 1) <= 7 && (Main.column - 1) >= 0 && (Main.row - 1) <= 7 && (Main.row - 1) >= 0)) {
+							cellColor = true;
+							if (cells[column + 1][row + 1] == 0) {
+								forwardRight = true;
+							}
+							if (cells[column - 1][row + 1] == 0) {
+								forwardLeft = true;
+							}
+							frame.repaint();
+					}
 				}
-				if (playerMove == 2) {
-					cellColor = true;
-					playerMove = 1;
-					frame.repaint();
-					return;
+				playerMove = 2;
+				forwardRight = false;
+				forwardLeft = false;
+				if (playerMove == 2 && cells[column][row] == 2) {
+					if (((Main.column + 1) <= 7 && (Main.column + 1) >= 0 && (Main.row + 1) <= 7 && (Main.row + 1) >= 0) &&
+							 ((Main.column - 1) <= 7 && (Main.column - 1) >= 0 && (Main.row - 1) <= 7 && (Main.row - 1) >= 0)) {
+						cellColor = true;
+						if (cells[column - 1][row - 1] == 0) {
+							twoForwardLeft = true;
+						}
+						if (cells[column + 1][row - 1] == 0) {
+							twoForwardRight = true;
+						}
+						frame.repaint();
+					}
+								
 				}
+				playerMove = 1;
+				twoForwardLeft = false;
+				twoForwardRight = false;		
 			}
 			
 		}
