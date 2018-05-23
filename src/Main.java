@@ -25,7 +25,7 @@ public class Main implements MouseListener, ActionListener{
 	
 	Draw draw = new Draw();
 
-	public static int[][] cells = new int[7][7];
+	public static int[][] cells = new int[8][8];
 	int twoPlayer_state = 0;
 	int vsAi_state = 0;
 	int playerMove = 1;
@@ -53,6 +53,7 @@ public class Main implements MouseListener, ActionListener{
 		frame.add(draw, BorderLayout.CENTER);
 		draw.addMouseListener(this);
 
+		new CPieces();
 		
 		south.setLayout(new BorderLayout());
 		south.add(easts, BorderLayout.EAST);
@@ -82,6 +83,7 @@ public class Main implements MouseListener, ActionListener{
 		frame.setVisible(true);
 		
 		frame.repaint();
+		
 		
 	}
 
@@ -113,21 +115,23 @@ public class Main implements MouseListener, ActionListener{
 	@Override
 	public void mouseReleased(MouseEvent event) 
 	{
+		
 		double width = 70;
 		double height = 70;
 		if (event.getX() <= 560 && event.getY() <= 560) {
 			column = Math.min(cells[0].length, (int)((event.getX() - 30)/ width));
 			row = Math.min(cells.length , (int)((event.getY() - 30)/ height));
-			//System.out.println(column + "," + row);
+			System.out.println(cells[column][row]);
 			//frame.repaint();
-			if ((column == 0 && row == 1) || (column == 0 && row == 3) || (column == 0 && row == 5) || (column == 0 && row == 7)
+			if ( (cells[column][row] == 1) || (cells[column][row] == 2)
+					/*(column == 0 && row == 1) || (column == 0 && row == 3) || (column == 0 && row == 5) || (column == 0 && row == 7)
 					|| (column == 1 && row == 0) ||(column == 1 && row == 2) ||(column == 1 && row == 4) ||(column == 1 && row == 6)
 					|| (column == 2 && row == 1) ||(column == 2 && row == 3) ||(column == 2 && row == 5) ||(column == 2 && row == 7)
 					|| (column == 3 && row == 0) ||(column == 3 && row == 2) ||(column == 3 && row == 4) ||(column == 3 && row == 6)
 					|| (column == 4 && row == 1) ||(column == 4 && row == 3) ||(column == 4 && row == 5) ||(column == 4 && row == 7)
 					|| (column == 5 && row == 0) ||(column == 5 && row == 2) ||(column == 5 && row == 4) ||(column == 5 && row == 6)
 					|| (column == 6 && row == 1) ||(column == 6 && row == 3) ||(column == 6 && row == 5) ||(column == 6 && row == 7)
-					|| (column == 7 && row == 0) ||(column == 7 && row == 2) ||(column == 7 && row == 4) ||(column == 7 && row == 6)) {
+					|| (column == 7 && row == 0) ||(column == 7 && row == 2) ||(column == 7 && row == 4) ||(column == 7 && row == 6)) */ ){
 				if (playerMove == 1) {
 					cellColor = true;
 					playerMove = 2;

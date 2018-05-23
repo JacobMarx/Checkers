@@ -1,22 +1,22 @@
 
-public class CPieces {
+public class CPieces{
 	
-	int[] twopieces = new int[12];
-	int[] onepieces = new int[12];
-	int[][] board = new int[8][8];
+	public static int[] twopieces = new int[12];
+	public static int[] onepieces = new int[12];
+	//public static int[][] board = new int[8][8];
 
 	
-	public void CPieces() {
+	/*public CPieces() {
 		startup();
 		
 		
-	}
+	}*/
 	
-	public void startup() {
+	public CPieces() {
 		
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
-				board[i][j] = 0;
+				Main.cells[i][j] = 0;
 			}
 		}
 		
@@ -25,36 +25,31 @@ public class CPieces {
 			twopieces[i] = 2;
 		}
 		
-		onepieces[0] = board[0][1];
-		onepieces[1] = board[0][3];
-		onepieces[2] = board[0][5];
-		onepieces[3] = board[0][7];
-		onepieces[4] = board[1][0];
-		onepieces[5] = board[1][2];
-		onepieces[6] = board[1][4];
-		onepieces[7] = board[1][6];
-		onepieces[8] = board[2][1];
-		onepieces[9] = board[2][3];
-		onepieces[10] = board[2][5];
-		onepieces[11] = board[2][7];
+		Main.cells[1][0] = onepieces[0];
+		Main.cells[3][0] = onepieces[1];
+		Main.cells[5][0] = onepieces[2];
+		Main.cells[7][0] = onepieces[3];
+		Main.cells[0][1] = onepieces[4];
+		Main.cells[2][1] = onepieces[5];
+		Main.cells[4][1] = onepieces[6];
+		Main.cells[6][1] = onepieces[7];
+		Main.cells[1][2] = onepieces[8];
+		Main.cells[3][2] = onepieces[9];
+		Main.cells[5][2] = onepieces[10];
+		Main.cells[7][2] = onepieces[11];
 		
-		twopieces[0] = board[5][0];
-		twopieces[0] = board[5][2];
-		twopieces[0] = board[5][4];
-		twopieces[0] = board[5][6];
-		twopieces[0] = board[6][1];
-		twopieces[0] = board[6][3];
-		twopieces[0] = board[6][5];
-		twopieces[0] = board[6][7];
-		twopieces[0] = board[7][0];
-		twopieces[0] = board[7][2];
-		twopieces[0] = board[7][4];
-		twopieces[0] = board[7][6];
-
-		
-		
-		
-		
+		Main.cells[0][5] = twopieces[0];
+		Main.cells[2][5] = twopieces[1];
+		Main.cells[4][5] = twopieces[2];
+		Main.cells[6][5] = twopieces[3];
+		Main.cells[1][6] = twopieces[4];
+		Main.cells[3][6] = twopieces[5];
+		Main.cells[5][6] = twopieces[6];
+		Main.cells[7][6] = twopieces[7];
+		Main.cells[0][7] = twopieces[8];
+		Main.cells[2][7] = twopieces[9];
+		Main.cells[4][7] = twopieces[10];
+		Main.cells[6][7] = twopieces[11];	
 		
 	}
 	
