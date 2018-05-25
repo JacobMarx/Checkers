@@ -144,8 +144,19 @@ public class Main implements MouseListener, ActionListener{
 						}
 						moveCounter = 1;
 				}
-				
-				
+				else if (playerMove == 2 && cells[column][row] == 2) {
+					cellColor = true;
+					draw.repaint();
+					if (cells[column + 1][row - 1] == 0) {
+						twoForwardRight = true;
+						draw.repaint();
+					}
+					if (cells[column - 1][row - 1] == 0 ) {
+						twoForwardLeft = true;
+						draw.repaint();
+					}
+					moveCounter = 1;
+				}
 			}
 		}
 	}
@@ -165,24 +176,32 @@ public class Main implements MouseListener, ActionListener{
 						cells[column][row] = 0;
 					}
 					cells[secondColumn][secondRow] = 1;
+					cellColor = false;
 					forwardRight = false;
 					forwardLeft = false;
 					playerMove = 2;
 					draw.repaint();
 					moveCounter = 0;
 				}
-				//cells[secondColumn][secondRow] = 1;
-				//cells[column][row] = 0;
-				//draw.repaint();
+				else if (playerMove == 2 && (twoForwardRight == true || twoForwardLeft == true)) {
+					if (cells[secondColumn][secondRow] == cells[column + 1][row - 1]) {
+						cells[column][row] = 0;
+					}
+					if (cells[secondColumn][secondRow] == cells[column - 1][row - 1]) {
+						cells[column][row] = 0;
+					}
+					cells[secondColumn][secondRow] = 2;
+					cellColor = false;
+					twoForwardRight = false;
+					twoForwardLeft = false;
+					playerMove = 1;
+					draw.repaint();
+					moveCounter = 0;
+				}
 			}
-			//return;
-		}
-		//moveCounter = 0;
+		}	
 	}
-		
-			
-		 
-	}
+}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(twoPlayer)) {
