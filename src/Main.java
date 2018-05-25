@@ -163,8 +163,8 @@ public class Main implements MouseListener, ActionListener{
 				twoForwardRight = false;		
 			}
 			
+			
 		}
-		 
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -199,6 +199,20 @@ public class Main implements MouseListener, ActionListener{
 				frame.repaint();
 				return;
 			}
+		}
+		
+	}
+	
+	public void ai() {
+		if(vsAi_state == 0) {
+			if (cells[column][row] == 2 && cells[column + 1][row - 1] == 1 && cells[column - 1][row + 1] == 0) { //p1 top right ai mid empty bot left
+			
+			}
+			if (cells[column][row] == 2 && cells[column - 1][row - 1] == 1 && cells[column + 1][row + 1] == 0) { //p1 top left ai mid empty bot right
+				
+			}
+			
+
 		}
 		
 	}
