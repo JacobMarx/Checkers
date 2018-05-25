@@ -144,11 +144,8 @@ public class Main implements MouseListener, ActionListener{
 						}
 						moveCounter = 1;
 				}
-				if (playerMove == 2 && cells[column][row] == 2) {
-					while (playMade == false) {
-						
-					}
-				}
+				
+				
 			}
 		}
 	}
@@ -161,21 +158,26 @@ public class Main implements MouseListener, ActionListener{
 			
 			if (cells[secondColumn][secondRow] == 0) {
 				if (playerMove == 1 && (forwardRight == true || forwardLeft == true)) {
+					if (cells[secondColumn][secondRow] == cells[column + 1][row + 1]) {
+						cells[column][row] = 0;
+					}
+					if (cells[secondColumn][secondRow] == cells[column - 1][row + 1]) {
+						cells[column][row] = 0;
+					}
 					cells[secondColumn][secondRow] = 1;
-					if (cells[secondColumn][secondRow] == 1 && forwardRight == true) {
-						cells[column][row] = 0;
-					}
-					if (cells[secondColumn][secondRow] == 1 && forwardRight == true) {
-						cells[column][row] = 0;
-					}
+					forwardRight = false;
+					forwardLeft = false;
 					playerMove = 2;
+					draw.repaint();
+					moveCounter = 0;
 				}
-				cells[secondColumn][secondRow] = 1;
-				draw.repaint();
+				//cells[secondColumn][secondRow] = 1;
+				//cells[column][row] = 0;
+				//draw.repaint();
 			}
-			moveCounter = 0;
-			
+			//return;
 		}
+		//moveCounter = 0;
 	}
 		
 			
