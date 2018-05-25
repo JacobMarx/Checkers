@@ -22,8 +22,14 @@ public class Main implements MouseListener, ActionListener{
 	public static boolean forwardLeft = false;
 	public static boolean twoForwardRight = false;
 	public static boolean twoForwardLeft = false;
+	public static boolean playMade = false;
 	public static int column;
 	public static int row;
+	
+	int moveCounter = 0;
+	
+	double width = 70;
+	double height = 70;
 
 	JFrame frame = new JFrame();
 	
@@ -119,52 +125,65 @@ public class Main implements MouseListener, ActionListener{
 	@Override
 	public void mouseReleased(MouseEvent event) 
 	{
-		
-		double width = 70;
-		double height = 70;
+	if (moveCounter == 0) {
 		if (event.getX() <= 560 && event.getY() <= 560) {
 			column = Math.min(cells[0].length, (int)((event.getX() - 30)/ width));
 			row = Math.min(cells.length , (int)((event.getY() - 30)/ height));
-			System.out.println(cells[column][row]);
-			//frame.repaint();
-			if ( (cells[column][row] == 1) || (cells[column][row] == 2)){
+			
+			if (cells[column][row] == 1 || cells[column][row] == 2) {
 				if (playerMove == 1 && cells[column][row] == 1) {
-					if (((Main.column + 1) <= 7 && (Main.column + 1) >= 0 && (Main.row + 1) <= 7 && (Main.row + 1) >= 0) &&
-						 ((Main.column - 1) <= 7 && (Main.column - 1) >= 0 && (Main.row - 1) <= 7 && (Main.row - 1) >= 0)) {
-							cellColor = true;
-							if (cells[column + 1][row + 1] == 0) {
-								forwardRight = true;
-							}
-							if (cells[column - 1][row + 1] == 0) {
-								forwardLeft = true;
-							}
-							frame.repaint();
-					}
+					cellColor = true;
+					draw.repaint();
+						if (cells[column + 1][row + 1] == 0) {
+							forwardRight = true;
+							draw.repaint();
+						}
+						if (cells[column - 1][row + 1] == 0 ) {
+							forwardLeft = true;
+							draw.repaint();
+						}
+						moveCounter = 1;
 				}
-				playerMove = 2;
-				forwardRight = false;
-				forwardLeft = false;
 				if (playerMove == 2 && cells[column][row] == 2) {
-					if (((Main.column + 1) <= 7 && (Main.column + 1) >= 0 && (Main.row + 1) <= 7 && (Main.row + 1) >= 0) &&
-							 ((Main.column - 1) <= 7 && (Main.column - 1) >= 0 && (Main.row - 1) <= 7 && (Main.row - 1) >= 0)) {
-						cellColor = true;
-						if (cells[column - 1][row - 1] == 0) {
-							twoForwardLeft = true;
-						}
-						if (cells[column + 1][row - 1] == 0) {
-							twoForwardRight = true;
-						}
-						frame.repaint();
+					while (playMade == false) {
+						
 					}
-								
 				}
-				playerMove = 1;
-				twoForwardLeft = false;
-				twoForwardRight = false;		
 			}
+		}
+	}
+	if (moveCounter == 1) {
+		if (event.getX() <= 560 && event.getY() <= 560) {
+			int secondColumn;
+			int secondRow;
+			secondColumn = Math.min(cells[0].length, (int)((event.getX() - 30)/ width));
+			secondRow = Math.min(cells.length , (int)((event.getY() - 30)/ height));
+			
+			if (cells[secondColumn][secondRow] == 0) {
+				if (playerMove == 1 && (forwardRight == true || forwardLeft == true)) {
+					cells[secondColumn][secondRow] = 1;
+					if (cells[secondColumn][secondRow] == 1 && forwardRight == true) {
+						cells[column][row] = 0;
+					}
+					if (cells[secondColumn][secondRow] == 1 && forwardRight == true) {
+						cells[column][row] = 0;
+					}
+					playerMove = 2;
+				}
+				cells[secondColumn][secondRow] = 1;
+				draw.repaint();
+			}
+			moveCounter = 0;
 			
 			
 		}
+<<<<<<< HEAD
+=======
+	}
+		
+			
+		 
+>>>>>>> bb555103ee930e5c4ad0646866f60f5b11783de7
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -225,3 +244,61 @@ public class Main implements MouseListener, ActionListener{
 
 	
 }
+
+/* 
+	//frame.repaint();
+	if ( (cells[column][row] == 1) || (cells[column][row] == 2)){
+		if (playerMove == 1 && cells[column][row] == 1) {
+			//while (playMade == false) {
+					cellColor = true;
+					frame.repaint();
+					
+				
+					//if (((column + 1) <= 7 ) && ((row + 1) <= 7)) {
+					//	if (cells[column + 1][row + 1] == 0) {
+							System.out.println("compton");
+							forwardRight = true;
+							
+							frame.repaint();
+							
+					//	}
+				
+					//}
+					if (((column + 1) >= 0) && ((row + 1) <= 7)) {
+						if (cells[column - 1][row + 1] == 0) {
+							forwardLeft = true;
+							frame.repaint();
+
+						}
+					}
+					//playMade = true;
+	
+			//}
+			//playerMove = 2;
+		}
+		forwardRight = false;
+		forwardLeft = false;
+		cellColor = false;
+
+		
+	/*	if (playerMove == 2 && cells[column][row] == 2) {
+			if (((Main.column + 1) <= 7 && (Main.column + 1) >= 0 && (Main.row + 1) <= 7 && (Main.row + 1) >= 0) &&
+					 ((Main.column - 1) <= 7 && (Main.column - 1) >= 0 && (Main.row - 1) <= 7 && (Main.row - 1) >= 0)) {
+				cellColor = true;
+				if (cells[column - 1][row - 1] == 0) {
+					twoForwardLeft = true;
+				}
+				if (cells[column + 1][row - 1] == 0) {
+					twoForwardRight = true;
+				}
+				frame.repaint();
+			}
+						
+		}
+		playerMove = 1;
+		twoForwardLeft = false;
+		twoForwardRight = false;		
+		cellColor = false;
+	}
+	
+}*/ 

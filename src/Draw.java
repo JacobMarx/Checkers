@@ -11,11 +11,12 @@ public class Draw extends JPanel{
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
+		//checker board
 		g.setColor(Color.WHITE);
 		g.fillRect(30, 30, 560, 560);
 		g.setColor(Color.WHITE);
-		
-		//checker board
+
 		for (int a = 100; a <= 550 ; a = a + 140) {
 			for (int b = 30; b <= 550; b = b + 140) {
 				g.setColor(Color.BLACK);
@@ -29,41 +30,19 @@ public class Draw extends JPanel{
 			}
 		}
 	
-		//top game pieces
-		
-		/*
-		for (int l = 0; l < 12; l++) {
-			System.out.println(l);
-		    g.setColor(Color.YELLOW);
-			g.fillOval((PlayerOne.getPOney(l) * 70) + 45, (PlayerOne.getPOnex(l) * 70) + 45, 40, 40);
-		}
-		*/
-		
-		for (int a = 30; a < 550; a = a + 140) {
-			for (int b = 100; b <=100; b = b + 140) {
-				g.setColor(Color.YELLOW);
-				g.fillOval(a + 15, b + 15, 40, 40);
-			}
-		}
-		for (int a = 100; a <= 550; a = a + 140) {
-			for (int b = 30; b < 280; b = b + 140) {
-				g.setColor(Color.YELLOW);
-				g.fillOval(a + 15, b + 15, 40, 40);
-			}
-		}
-		
-		
-		//bottom game pieces
-		for (int a = 30; a < 550; a = a + 140) {
-			for (int b = 380; b <=520; b = b + 140) {
-				g.setColor(Color.RED);
-				g.fillOval(a + 15, b + 15, 40, 40);
-			}
-		}
-		for (int a = 100; a <= 550; a = a + 140) {
-			for (int b = 450; b <= 450; b = b + 140) {
-				g.setColor(Color.RED);
-				g.fillOval(a + 15, b + 15, 40, 40);
+		//game pieces
+		for (int a = 0; a < 8; a++) {
+			for (int b = 0; b < 8; b++) {
+				if (Main.cells[a][b] == 1) {
+					g.setColor(Color.YELLOW);
+					g.fillOval(((a * 70) + 30) + 15, ((b * 70) + 30) + 15, 40, 40);
+				}
+				else if (Main.cells[a][b] == 2) {
+					g.setColor(Color.RED);
+					g.fillOval(((a * 70) + 30) + 15, ((b * 70) + 30) + 15, 40, 40);
+				}
+				else {}
+				
 			}
 		}
 		
@@ -97,7 +76,7 @@ public class Draw extends JPanel{
 				g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row - 1) * 70) + 30, 69, 69);
 				g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row - 1) * 70) + 30, 68, 68);
 			}
-			
+		return;
 		}
 		
 	}
