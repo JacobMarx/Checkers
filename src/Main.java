@@ -134,28 +134,47 @@ public class Main implements MouseListener, ActionListener{
 				if (playerMove == 1 && cells[column][row] == 1) {
 					cellColor = true;
 					draw.repaint();
+					if ((column + 1) <= 7 && (row + 1) <= 7) {
 						if (cells[column + 1][row + 1] == 0) {
 							forwardRight = true;
 							draw.repaint();
-						}
-						if (cells[column - 1][row + 1] == 0 ) {
+						}	
+					}
+					if ((column - 1) >= 0 && (row + 1) <= 7) {
+						if (cells[column - 1][row + 1] == 0) {
 							forwardLeft = true;
 							draw.repaint();
 						}
+					}
+					if (forwardRight == true || forwardLeft == true) {
 						moveCounter = 1;
+					}
+					if (forwardRight == false && forwardLeft == false) {
+						moveCounter = 0;
+					}
+						
 				}
 				else if (playerMove == 2 && cells[column][row] == 2) {
 					cellColor = true;
 					draw.repaint();
-					if (cells[column + 1][row - 1] == 0) {
-						twoForwardRight = true;
-						draw.repaint();
+					if ((column + 1) <= 7 && (row - 1) >= 0) {
+						if (cells[column + 1][row - 1] == 0) {
+							twoForwardRight = true;
+							draw.repaint();
+						}
 					}
-					if (cells[column - 1][row - 1] == 0 ) {
-						twoForwardLeft = true;
-						draw.repaint();
+					if ((column - 1) >= 0 && (row - 1) >= 0) {
+						if (cells[column - 1][row - 1] == 0) {
+							twoForwardLeft = true;
+							draw.repaint();
+						}
 					}
-					moveCounter = 1;
+					if (twoForwardRight == true || twoForwardLeft == true) {
+						moveCounter = 1;
+					}
+					if (twoForwardRight == false && twoForwardLeft == false) {
+						moveCounter = 0;
+					}
 				}
 			}
 		}
@@ -169,11 +188,15 @@ public class Main implements MouseListener, ActionListener{
 			
 			if (cells[secondColumn][secondRow] == 0) {
 				if (playerMove == 1 && (forwardRight == true || forwardLeft == true)) {
-					if (cells[secondColumn][secondRow] == cells[column + 1][row + 1]) {
-						cells[column][row] = 0;
+					if ((column + 1) <= 7 && (row + 1) <= 7) {
+						if (cells[secondColumn][secondRow] == cells[column + 1][row + 1]) {
+							cells[column][row] = 0;
+						}
 					}
-					if (cells[secondColumn][secondRow] == cells[column - 1][row + 1]) {
-						cells[column][row] = 0;
+					if ((column - 1) >= 0 && (row + 1) <= 7) {
+						if (cells[secondColumn][secondRow] == cells[column - 1][row + 1]) {
+							cells[column][row] = 0;
+						}
 					}
 					cells[secondColumn][secondRow] = 1;
 					cellColor = false;
@@ -184,11 +207,15 @@ public class Main implements MouseListener, ActionListener{
 					moveCounter = 0;
 				}
 				else if (playerMove == 2 && (twoForwardRight == true || twoForwardLeft == true)) {
-					if (cells[secondColumn][secondRow] == cells[column + 1][row - 1]) {
-						cells[column][row] = 0;
+					if ((column + 1) <= 7 && (row - 1) >= 0)	{
+						if (cells[secondColumn][secondRow] == cells[column + 1][row - 1]) {
+							cells[column][row] = 0;
+						}
 					}
-					if (cells[secondColumn][secondRow] == cells[column - 1][row - 1]) {
-						cells[column][row] = 0;
+					if ((column - 1) >= 0 && (row - 1) >= 0)	{
+						if (cells[secondColumn][secondRow] == cells[column - 1][row - 1]) {
+							cells[column][row] = 0;
+						}
 					}
 					cells[secondColumn][secondRow] = 2;
 					cellColor = false;
