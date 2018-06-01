@@ -27,6 +27,7 @@ public class Main implements MouseListener, ActionListener{
 	public static int row;
 	
 	int moveCounter = 0;
+	int piecesCounter = 0;
 	
 	double width = 70;
 	double height = 70;
@@ -134,28 +135,47 @@ public class Main implements MouseListener, ActionListener{
 				if (playerMove == 1 && cells[column][row] == 1) {
 					cellColor = true;
 					draw.repaint();
+					if ((column + 1) <= 7 && (row + 1) <= 7) {
 						if (cells[column + 1][row + 1] == 0) {
 							forwardRight = true;
 							draw.repaint();
-						}
-						if (cells[column - 1][row + 1] == 0 ) {
+						}	
+					}
+					if ((column - 1) >= 0 && (row + 1) <= 7) {
+						if (cells[column - 1][row + 1] == 0) {
 							forwardLeft = true;
 							draw.repaint();
 						}
+					}
+					if (forwardRight == true || forwardLeft == true) {
 						moveCounter = 1;
+					}
+					if (forwardRight == false && forwardLeft == false) {
+						moveCounter = 0;
+					}
+						
 				}
 				else if (playerMove == 2 && cells[column][row] == 2) {
 					cellColor = true;
 					draw.repaint();
-					if (cells[column + 1][row - 1] == 0) {
-						twoForwardRight = true;
-						draw.repaint();
+					if ((column + 1) <= 7 && (row - 1) >= 0) {
+						if (cells[column + 1][row - 1] == 0) {
+							twoForwardRight = true;
+							draw.repaint();
+						}
 					}
-					if (cells[column - 1][row - 1] == 0 ) {
-						twoForwardLeft = true;
-						draw.repaint();
+					if ((column - 1) >= 0 && (row - 1) >= 0) {
+						if (cells[column - 1][row - 1] == 0) {
+							twoForwardLeft = true;
+							draw.repaint();
+						}
 					}
-					moveCounter = 1;
+					if (twoForwardRight == true || twoForwardLeft == true) {
+						moveCounter = 1;
+					}
+					if (twoForwardRight == false && twoForwardLeft == false) {
+						moveCounter = 0;
+					}
 				}
 			}
 		}
@@ -169,11 +189,15 @@ public class Main implements MouseListener, ActionListener{
 			
 			if (cells[secondColumn][secondRow] == 0) {
 				if (playerMove == 1 && (forwardRight == true || forwardLeft == true)) {
-					if (cells[secondColumn][secondRow] == cells[column + 1][row + 1]) {
-						cells[column][row] = 0;
+					if ((column + 1) <= 7 && (row + 1) <= 7) {
+						if (cells[secondColumn][secondRow] == cells[column + 1][row + 1]) {
+							cells[column][row] = 0;
+						}
 					}
-					if (cells[secondColumn][secondRow] == cells[column - 1][row + 1]) {
-						cells[column][row] = 0;
+					if ((column - 1) >= 0 && (row + 1) <= 7) {
+						if (cells[secondColumn][secondRow] == cells[column - 1][row + 1]) {
+							cells[column][row] = 0;
+						}
 					}
 					cells[secondColumn][secondRow] = 1;
 					cellColor = false;
@@ -184,11 +208,15 @@ public class Main implements MouseListener, ActionListener{
 					moveCounter = 0;
 				}
 				else if (playerMove == 2 && (twoForwardRight == true || twoForwardLeft == true)) {
-					if (cells[secondColumn][secondRow] == cells[column + 1][row - 1]) {
-						cells[column][row] = 0;
+					if ((column + 1) <= 7 && (row - 1) >= 0)	{
+						if (cells[secondColumn][secondRow] == cells[column + 1][row - 1]) {
+							cells[column][row] = 0;
+						}
 					}
-					if (cells[secondColumn][secondRow] == cells[column - 1][row - 1]) {
-						cells[column][row] = 0;
+					if ((column - 1) >= 0 && (row - 1) >= 0)	{
+						if (cells[secondColumn][secondRow] == cells[column - 1][row - 1]) {
+							cells[column][row] = 0;
+						}
 					}
 					cells[secondColumn][secondRow] = 2;
 					cellColor = false;
@@ -199,23 +227,8 @@ public class Main implements MouseListener, ActionListener{
 					moveCounter = 0;
 				}
 			}
-			moveCounter = 0;
-			
-			
-		}
+		}	
 	}
-	
-	if (moveCounter == 1 && vsAi_state == 0) {
-		try {
-			usefulmoves();
-		} catch (Exception ex) {
-			repetitive();
-		}
-
-	}
-		
-			
-	
 }
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -253,26 +266,53 @@ public class Main implements MouseListener, ActionListener{
 		}
 		
 	}
-	
-	public void usefulmoves() {
-
-			if (cells[column][row] == 2 && cells[column + 1][row - 1] == 1 && cells[column - 1][row + 1] == 0) { //p1 top right ai mid empty bot left
-			
-			}
-			if (cells[column][row] == 2 && cells[column - 1][row - 1] == 1 && cells[column + 1][row + 1] == 0) { //p1 top left ai mid empty bot right
-				
-			}	
-		
-	}
-	
-	public void repetitive() {
-		//cell[]
-	}
 
 
 	public static void main(String[] args) {
 		new Main();
 
+	}
+	
+	public void kingStatus() {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				if (cells[i][j] == 1 && j == 7) {
+					cells[i][j] = 3;
+				}
+				if (cells[i][j] == 2 && j == 0) {
+					cells[i][j] = 4;
+				}
+			}
+		}
+	}
+	
+	public void checkWin() {
+		if (playerMove == 2) {
+			for (int i = 0; i < cells.length; i++) {
+				for (int j = 0; j < cells.length; j++) {
+					if (cells[i][j] == 2 || cells[i][j] == 4) {
+						piecesCounter++;
+						if (piecesCounter >= 1) {
+							//player two wins!!!!!!!!!!!!!!!!!!!!
+							piecesCounter = 0;
+						}
+					}
+				}
+			}
+		}
+		if (playerMove == 1) {
+			for (int i = 0; i < cells.length; i++) {
+				for (int j = 0; j < cells.length; j++) {
+					if (cells[i][j] == 1 || cells[i][j] == 3) {
+						piecesCounter++;
+						if (piecesCounter >= 1) {
+							//player one wins!!!!!!!!!!!!!!!!!!!!
+							piecesCounter = 0;
+						}
+					}
+				}
+			}
+		}
 	}
 
 	
