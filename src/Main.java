@@ -24,12 +24,15 @@ public class Main implements MouseListener, ActionListener{
 	public static boolean forwardLeftJump = false;
 	public static boolean twoForwardRight = false;
 	public static boolean twoForwardLeft = false;
+	public static boolean twoForwardRightJump = false;
+	public static boolean twoForwardLeftJump = false;
 	public static boolean playMade = false;
 	public static int column;
 	public static int row;
 	
 	int move = 0;
 	int moveCounter = 0;
+	int piecesCounter = 0;
 	
 	double width = 70;
 	double height = 70;
@@ -185,10 +188,22 @@ public class Main implements MouseListener, ActionListener{
 							draw.repaint();
 						}
 					}
-					if (twoForwardRight == true || twoForwardLeft == true) {
+					if ((column + 2) <= 7 && (row - 2) >= 0) {
+						if (cells[column + 1][row - 1] == 1 && cells[column + 2][row - 2] == 0) {
+							twoForwardRightJump = true;
+							draw.repaint();
+						}
+					}
+					if ((column - 2) >= 0 && (row - 2) >= 0) {
+						if (cells[column - 1][row - 1] == 1 && cells[column - 2][row - 2] == 0) {
+							twoForwardLeftJump = true;
+							draw.repaint();
+						}
+					}
+					if (forwardRight == true || forwardLeft == true || twoForwardRightJump == true || twoForwardLeftJump == true) {
 						moveCounter = 1;
 					}
-					if (twoForwardRight == false && twoForwardLeft == false) {
+					if (forwardRight == false && forwardLeft == false && twoForwardRightJump == false && twoForwardLeftJump == false) {
 						moveCounter = 0;
 					}
 				}
@@ -332,6 +347,48 @@ public class Main implements MouseListener, ActionListener{
 	public static void main(String[] args) {
 		new Main();
 
+	}
+	
+	public void kingStatus() {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				if (cells[i][j] == 1 && j == 7) {
+					cells[i][j] = 3;
+				}
+				if (cells[i][j] == 2 && j == 0) {
+					cells[i][j] = 4;
+				}
+			}
+		}
+	}
+	
+	public void checkWin() {
+		if (playerMove == 2) {
+			for (int i = 0; i < cells.length; i++) {
+				for (int j = 0; j < cells.length; j++) {
+					if (cells[i][j] == 2 || cells[i][j] == 4) {
+						piecesCounter++;
+						if (piecesCounter >= 1) {
+							//player two wins!!!!!!!!!!!!!!!!!!!!
+							piecesCounter = 0;
+						}
+					}
+				}
+			}
+		}
+		if (playerMove == 1) {
+			for (int i = 0; i < cells.length; i++) {
+				for (int j = 0; j < cells.length; j++) {
+					if (cells[i][j] == 1 || cells[i][j] == 3) {
+						piecesCounter++;
+						if (piecesCounter >= 1) {
+							//player one wins!!!!!!!!!!!!!!!!!!!!
+							piecesCounter = 0;
+						}
+					}
+				}
+			}
+		}
 	}
 
 	
