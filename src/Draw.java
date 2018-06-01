@@ -88,6 +88,18 @@ public class Draw extends JPanel{
 				g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row - 1) * 70) + 30, 69, 69);
 				g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row - 1) * 70) + 30, 68, 68);
 			}
+			if (Main.twoForwardRightJump == true) {
+				g.setColor(Color.PINK);
+				g.drawRect(((Main.column + 2) * 70) + 30, ((Main.row - 2) * 70) + 30, 70, 70);
+				g.drawRect(((Main.column + 2) * 70) + 30, ((Main.row - 2) * 70) + 30, 69, 69);
+				g.drawRect(((Main.column + 2) * 70) + 30, ((Main.row - 2) * 70) + 30, 68, 68);
+			}
+			if (Main.twoForwardLeftJump == true) {
+				g.setColor(Color.PINK);
+				g.drawRect(((Main.column - 2) * 70) + 30, ((Main.row - 2) * 70) + 30, 70, 70);
+				g.drawRect(((Main.column - 2) * 70) + 30, ((Main.row - 2) * 70) + 30, 69, 69);
+				g.drawRect(((Main.column - 2) * 70) + 30, ((Main.row - 2) * 70) + 30, 68, 68);
+			}
 		return;
 		}
 		

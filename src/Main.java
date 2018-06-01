@@ -200,10 +200,10 @@ public class Main implements MouseListener, ActionListener{
 							draw.repaint();
 						}
 					}
-					if (forwardRight == true || forwardLeft == true || twoForwardRightJump == true || twoForwardLeftJump == true) {
+					if (twoForwardRight == true || twoForwardLeft == true || twoForwardRightJump == true || twoForwardLeftJump == true) {
 						moveCounter = 1;
 					}
-					if (forwardRight == false && forwardLeft == false && twoForwardRightJump == false && twoForwardLeftJump == false) {
+					if (twoForwardRight == false && twoForwardLeft == false && twoForwardRightJump == false && twoForwardLeftJump == false) {
 						moveCounter = 0;
 					}
 				}
@@ -269,7 +269,7 @@ public class Main implements MouseListener, ActionListener{
 						draw.repaint();
 					}
 				}
-				else if (playerMove == 2 && (twoForwardRight == true || twoForwardLeft == true)) {
+				else if (playerMove == 2 && (twoForwardRight == true || twoForwardLeft == true || twoForwardRightJump == true || twoForwardLeftJump == true)) {
 					if ((column + 1) <= 7 && (row - 1) >= 0)	{
 						if (secondColumn == column + 1 && secondRow == row - 1) {
 							cells[column][row] = 0;
@@ -284,18 +284,38 @@ public class Main implements MouseListener, ActionListener{
 							//kingStatus();
 						}
 					}
-					if ((secondColumn == column + 1 && secondRow == row - 1) || (secondColumn == column - 1 && secondRow == row - 1)) {
+					if ((column + 2) <= 7 && (row - 2) >= 0) {
+						if (secondColumn == column + 2 && secondRow == row - 2) {
+							cells[column][row] = 0;
+							cells[column + 2][row - 2] = 2;
+							cells[column + 1][row - 1] = 0;
+							//kingStatus();
+						}
+					}
+					if ((column - 2) >= 0 && (row - 2) >= 0) {
+						if (secondColumn == column - 2 && secondRow == row - 2) {
+							cells[column][row] = 0;
+							cells[column - 2][row - 2] = 2;
+							cells[column - 1][row - 1] = 0;
+							//kingStatus();
+						}
+					}
+					if ((secondColumn == column + 1 && secondRow == row - 1) || (secondColumn == column - 1 && secondRow == row - 1) || (secondColumn == column + 2 && secondRow == row - 2) || (secondColumn == column - 2 && secondRow == row - 2)) {
 						cellColor = false;
 						twoForwardRight = false;
 						twoForwardLeft = false;
+						twoForwardRightJump = false;
+						twoForwardLeftJump = false;
 						playerMove = 1;
 						moveCounter = 0;
 						draw.repaint();
 					}
-					else if (!(secondColumn == column + 1 && secondRow == row - 1) && !(secondColumn == column - 1 && secondRow == row - 1)) {
+					else if (!(secondColumn == column + 1 && secondRow == row - 1) && !(secondColumn == column - 1 && secondRow == row - 1) && !(secondColumn == column + 2 && secondRow == row - 2) && !(secondColumn == column - 2 && secondRow == row - 2)) {
 						cellColor = false;
 						twoForwardRight = false;
 						twoForwardLeft = false;
+						twoForwardRightJump = false;
+						twoForwardLeftJump = false;
 						playerMove = 2;
 						moveCounter = 0;
 						draw.repaint();
