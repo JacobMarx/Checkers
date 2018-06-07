@@ -125,7 +125,8 @@ public class Main implements MouseListener, ActionListener{
 	@Override
 	public void mousePressed(MouseEvent event) 
 	{
-		
+		kingStatus();
+		frame.repaint();
 	}
 
 	@Override
@@ -136,7 +137,7 @@ public class Main implements MouseListener, ActionListener{
 			column = Math.min(cells[0].length, (int)((event.getX() - 30)/ width));
 			row = Math.min(cells.length , (int)((event.getY() - 30)/ height));
 			
-			if (cells[column][row] == 1 || cells[column][row] == 2) {
+			if (cells[column][row] == 1 || cells[column][row] == 2 || cells[column][row] == 3 || cells[column][row] == 4) {
 				if (playerMove == 1 && cells[column][row] == 1) {
 					cellColor = true;
 					draw.repaint();
@@ -172,6 +173,9 @@ public class Main implements MouseListener, ActionListener{
 						moveCounter = 0;
 					}
 						
+				}
+				else if (playerMove == 2 && vsAi_state == 1 && twoPlayer_state == 0) {
+					aiPlayer();
 				}
 				else if (playerMove == 2 && cells[column][row] == 2) {
 					cellColor = true;
@@ -362,21 +366,20 @@ public class Main implements MouseListener, ActionListener{
 		}
 		
 	}
-
-
-	public static void main(String[] args) {
-		new Main();
-
-	}
 	
 	public void kingStatus() {
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
-				if (cells[i][j] == 1 && j == 7) {
-					cells[i][j] = 3;
-				}
-				if (cells[i][j] == 2 && j == 0) {
-					cells[i][j] = 4;
+				for (int j2 = 0; j2 < 12; j2++) {
+					if (cells[i][j] == CPieces.onepieces[j2] && j == 7) {
+						//CPieces.onepieces[j2] = 3;
+						cells[i][j] = 3;
+					}
+					if (cells[i][j] == CPieces.twopieces[j2] && j < 2 && j > 0) {
+						//CPieces.twopieces[j2] = 4;
+						cells[i][j] = 4;
+						System.out.println("working?");
+					}
 				}
 			}
 		}
@@ -410,7 +413,87 @@ public class Main implements MouseListener, ActionListener{
 			}
 		}
 	}
+	
+	public void aiPlayer() {
+		aiBlock();
+		aiRandom();
+	}
+	
+	public void aiBlock() {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				if (cells[i][j] == 2 && cells[i + 1][j - 1] == 1 && cells[i - 1][j + 1] == 0) { //p1 top right ai mid empty bot left
+					if (cells[i - 2][j + 2] == 2) {//if piece from left of empty can move to empty 
+						cells[i - 2][j + 2] = 0;
+						cells[i - 1][j + 1] = 2;
+						playerMove = 1;
+						frame.repaint();
+					}
+					else if (cells[i][j + 2] == 2) {//if piece from right of empty can move to empty
+						cells[i][j + 2] = 0;
+						cells[i - 1][j + 1] = 2;
+						playerMove = 1;
+						frame.repaint();
+					}	
+					else if  (cells[i - 2][j + 2] == 4) {//same but if king 
+						cells[i - 2][j + 2] = 0;
+						cells[i - 1][j + 1] = 4;
+						playerMove = 1;
+						frame.repaint();
+					}
+					else if (cells[i][j + 2] == 4) {//same but if king
+						cells[i][j + 2] = 0;
+						cells[i - 1][j + 1] = 4;
+						playerMove = 1;
+						frame.repaint();
+					}
+				}
+				if (cells[i][j] == 2 && cells[i - 1][j - 1] == 1 && cells[i + 1][j + 1] == 0) { //p1 top left ai mid empty bot right
+			
+				}
+			}
+		}
+	}
+	
+	public void aiRandom() {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+		if (cells[i][j] == 2 && (i + 1) <= 7 && (j + 1) <= 7) {
+			if (cells[i + 1][j + 1] == 0) {
+				cells[i][j] = 0;
+				cells[i + 1][j - 1] = 2;
+				frame.repaint();
+				playerMove = 1;
+			}	
+		}
+		if (cells[i][j] == 2 && (i - 1) >= 0 && (j + 1) <= 7) {
+			if (cells[i - 1][j + 1] == 0) {
+				cells[i][j] = 0;
+				cells[i - 1][j - 1] = 2;
+				frame.repaint();
+				playerMove = 1;
+			}
+		}
+		/*if (cells[i][j] == 2 && (i + 2) <= 7 && (j + 2) <= 7) {
+			if (cells[i + 1][j + 1] == 2 && cells[i + 2][j + 2] == 0) {
+				forwardRightJump = true;
+				draw.repaint();
+			}
+		}
+		if (cells[i][j] == 2 && (i - 2) >= 0 && (j + 2) <= 7) {
+			if (cells[i - 1][j + 1] == 2 && cells[i - 2][j + 2] == 0) {
+				forwardLeftJump = true;
+				draw.repaint();
+			}
+		}*/
+			}
+		}
+	}
 
+	public static void main(String[] args) {
+		new Main();
+
+	}
 	
 }
 

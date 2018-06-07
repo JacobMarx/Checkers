@@ -61,7 +61,7 @@ public class CPieces{
 		Main.cells[0][7] = twopieces[8];
 		Main.cells[2][7] = twopieces[9];
 		Main.cells[4][7] = twopieces[10];
-		Main.cells[6][7] = twopieces[11];	
+		Main.cells[6][7] = twopieces[11];
 		
 	}
 	

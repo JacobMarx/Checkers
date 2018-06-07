@@ -41,9 +41,24 @@ public class Draw extends JPanel{
 					g.setColor(Color.RED);
 					g.fillOval(((a * 70) + 30) + 15, ((b * 70) + 30) + 15, 40, 40);
 				}
-				else {}
+				else if (Main.cells[a][b] == 3) {
+					g.setColor(Color.YELLOW);
+					g.fillOval(((a * 70) + 30) + 15, ((b * 70) + 30) + 15, 40, 40);
+					g.setColor(Color.WHITE);
+					g.fillRect(((a * 70) + 30) + 15, ((b * 70) + 30) + 15, 20, 20);
+				}
+				else if (Main.cells[a][b] == 4) {
+					g.setColor(Color.RED);
+					g.fillOval(((a * 70) + 30) + 15, ((b * 70) + 30) + 15, 40, 40);
+					g.setColor(Color.WHITE);
+					g.fillRect(((a * 70) + 30) + 15, ((b * 70) + 30) + 15, 20, 20);
+				}
 				
 			}
+		}
+		
+		for (int i = 0; i < 12; i++) {
+			
 		}
 		
 		if (Main.cellColor == true) {
