@@ -45,13 +45,13 @@ public class Draw extends JPanel{
 					g.setColor(Color.YELLOW);
 					g.fillOval(((a * 70) + 30) + 15, ((b * 70) + 30) + 15, 40, 40);
 					g.setColor(Color.WHITE);
-					g.fillRect(((a * 70) + 30) + 15, ((b * 70) + 30) + 15, 20, 20);
+					g.fillOval(((a * 70) + 30) + 25, ((b * 70) + 30) + 25, 20, 20);
 				}
 				else if (Main.cells[a][b] == 4) {
 					g.setColor(Color.RED);
 					g.fillOval(((a * 70) + 30) + 15, ((b * 70) + 30) + 15, 40, 40);
 					g.setColor(Color.WHITE);
-					g.fillRect(((a * 70) + 30) + 15, ((b * 70) + 30) + 15, 20, 20);
+					g.fillOval(((a * 70) + 30) + 25, ((b * 70) + 30) + 25, 20, 20);
 				}
 				
 			}
@@ -73,11 +73,23 @@ public class Draw extends JPanel{
 				g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row + 1) * 70) + 30, 69, 69);
 				g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row + 1) * 70) + 30, 68, 68);
 			}
+			if (Main.backwardRight == true) {
+				g.setColor(Color.BLUE);
+				g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row - 1) * 70) + 30, 70, 70);
+				g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row - 1) * 70) + 30, 69, 69);
+				g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row - 1) * 70) + 30, 68, 68);
+			}
 			if (Main.forwardLeft == true) {
 				g.setColor(Color.BLUE);
 				g.drawRect(((Main.column - 1) * 70) + 30, ((Main.row + 1) * 70) + 30, 70, 70);
 				g.drawRect(((Main.column - 1) * 70) + 30, ((Main.row + 1) * 70) + 30, 69, 69);
 				g.drawRect(((Main.column - 1) * 70) + 30, ((Main.row + 1) * 70) + 30, 68, 68);
+			}
+			if (Main.backwardLeft == true) {
+				g.setColor(Color.BLUE);
+				g.drawRect(((Main.column - 1) * 70) + 30, ((Main.row - 1) * 70) + 30, 70, 70);
+				g.drawRect(((Main.column - 1) * 70) + 30, ((Main.row - 1) * 70) + 30, 69, 69);
+				g.drawRect(((Main.column - 1) * 70) + 30, ((Main.row - 1) * 70) + 30, 68, 68);
 			}
 			if (Main.forwardRightJump == true) {
 				g.setColor(Color.BLUE);
@@ -85,11 +97,23 @@ public class Draw extends JPanel{
 				g.drawRect(((Main.column + 2) * 70) + 30, ((Main.row + 2) * 70) + 30, 69, 69);
 				g.drawRect(((Main.column + 2) * 70) + 30, ((Main.row + 2) * 70) + 30, 68, 68);
 			}
+			if (Main.backwardRightJump == true) {
+				g.setColor(Color.BLUE);
+				g.drawRect(((Main.column + 2) * 70) + 30, ((Main.row - 2) * 70) + 30, 70, 70);
+				g.drawRect(((Main.column + 2) * 70) + 30, ((Main.row - 2) * 70) + 30, 69, 69);
+				g.drawRect(((Main.column + 2) * 70) + 30, ((Main.row - 2) * 70) + 30, 68, 68);
+			}
 			if (Main.forwardLeftJump == true) {
 				g.setColor(Color.BLUE);
 				g.drawRect(((Main.column - 2) * 70) + 30, ((Main.row + 2) * 70) + 30, 70, 70);
 				g.drawRect(((Main.column - 2) * 70) + 30, ((Main.row + 2) * 70) + 30, 69, 69);
 				g.drawRect(((Main.column - 2) * 70) + 30, ((Main.row + 2) * 70) + 30, 68, 68);
+			}
+			if (Main.backwardLeftJump == true) {
+				g.setColor(Color.BLUE);
+				g.drawRect(((Main.column - 2) * 70) + 30, ((Main.row - 2) * 70) + 30, 70, 70);
+				g.drawRect(((Main.column - 2) * 70) + 30, ((Main.row - 2) * 70) + 30, 69, 69);
+				g.drawRect(((Main.column - 2) * 70) + 30, ((Main.row - 2) * 70) + 30, 68, 68);
 			}
 			if (Main.twoForwardLeft == true) {
 				g.setColor(Color.PINK);
@@ -97,11 +121,23 @@ public class Draw extends JPanel{
 				g.drawRect(((Main.column - 1) * 70) + 30, ((Main.row - 1) * 70) + 30, 69, 69);
 				g.drawRect(((Main.column - 1) * 70) + 30, ((Main.row - 1) * 70) + 30, 68, 68);
 			}
+			if (Main.twoBackwardLeft == true) {
+				g.setColor(Color.PINK);
+				g.drawRect(((Main.column - 1) * 70) + 30, ((Main.row + 1) * 70) + 30, 70, 70);
+				g.drawRect(((Main.column - 1) * 70) + 30, ((Main.row + 1) * 70) + 30, 69, 69);
+				g.drawRect(((Main.column - 1) * 70) + 30, ((Main.row + 1) * 70) + 30, 68, 68);
+			}
 			if (Main.twoForwardRight == true) {
 				g.setColor(Color.PINK);
 				g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row - 1) * 70) + 30, 70, 70);
 				g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row - 1) * 70) + 30, 69, 69);
 				g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row - 1) * 70) + 30, 68, 68);
+			}
+			if (Main.twoBackwardRight == true) {
+				g.setColor(Color.PINK);
+				g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row + 1) * 70) + 30, 70, 70);
+				g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row + 1) * 70) + 30, 69, 69);
+				g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row + 1) * 70) + 30, 68, 68);
 			}
 			if (Main.twoForwardRightJump == true) {
 				g.setColor(Color.PINK);
@@ -109,11 +145,23 @@ public class Draw extends JPanel{
 				g.drawRect(((Main.column + 2) * 70) + 30, ((Main.row - 2) * 70) + 30, 69, 69);
 				g.drawRect(((Main.column + 2) * 70) + 30, ((Main.row - 2) * 70) + 30, 68, 68);
 			}
+			if (Main.twoBackwardRightJump == true) {
+				g.setColor(Color.PINK);
+				g.drawRect(((Main.column + 2) * 70) + 30, ((Main.row + 2) * 70) + 30, 70, 70);
+				g.drawRect(((Main.column + 2) * 70) + 30, ((Main.row + 2) * 70) + 30, 69, 69);
+				g.drawRect(((Main.column + 2) * 70) + 30, ((Main.row + 2) * 70) + 30, 68, 68);
+			}
 			if (Main.twoForwardLeftJump == true) {
 				g.setColor(Color.PINK);
 				g.drawRect(((Main.column - 2) * 70) + 30, ((Main.row - 2) * 70) + 30, 70, 70);
 				g.drawRect(((Main.column - 2) * 70) + 30, ((Main.row - 2) * 70) + 30, 69, 69);
 				g.drawRect(((Main.column - 2) * 70) + 30, ((Main.row - 2) * 70) + 30, 68, 68);
+			}
+			if (Main.twoBackwardLeftJump == true) {
+				g.setColor(Color.PINK);
+				g.drawRect(((Main.column - 2) * 70) + 30, ((Main.row + 2) * 70) + 30, 70, 70);
+				g.drawRect(((Main.column - 2) * 70) + 30, ((Main.row + 2) * 70) + 30, 69, 69);
+				g.drawRect(((Main.column - 2) * 70) + 30, ((Main.row + 2) * 70) + 30, 68, 68);
 			}
 		return;
 		}

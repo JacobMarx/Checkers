@@ -22,10 +22,18 @@ public class Main implements MouseListener, ActionListener{
 	public static boolean forwardLeft = false;
 	public static boolean forwardRightJump = false;
 	public static boolean forwardLeftJump = false;
+	public static boolean backwardRight = false;
+	public static boolean backwardLeft = false;
+	public static boolean backwardRightJump = false;
+	public static boolean backwardLeftJump = false;
 	public static boolean twoForwardRight = false;
 	public static boolean twoForwardLeft = false;
 	public static boolean twoForwardRightJump = false;
 	public static boolean twoForwardLeftJump = false;
+	public static boolean twoBackwardRight = false;
+	public static boolean twoBackwardLeft = false;
+	public static boolean twoBackwardRightJump = false;
+	public static boolean twoBackwardLeftJump = false;
 	public static boolean playMade = false;
 	public static int column;
 	public static int row;
@@ -33,6 +41,7 @@ public class Main implements MouseListener, ActionListener{
 	int move = 0;
 	int moveCounter = 0;
 	int piecesCounter = 0;
+	int twoPiecesCounter = 0;
 	
 	double width = 70;
 	double height = 70;
@@ -60,7 +69,7 @@ public class Main implements MouseListener, ActionListener{
 	JButton start = new JButton("Start");
 	JButton end = new JButton("End");
 	JButton reset = new JButton("Reset");
-	JButton info = new JButton("Welcome to Checkers. Select your Preferences.");
+	JLabel info = new JLabel("Welcome to Checkers");
 	
 	public Main() {
 		frame.setSize(1000,800);
@@ -138,7 +147,7 @@ public class Main implements MouseListener, ActionListener{
 			row = Math.min(cells.length , (int)((event.getY() - 30)/ height));
 			
 			if (cells[column][row] == 1 || cells[column][row] == 2 || cells[column][row] == 3 || cells[column][row] == 4) {
-				if (playerMove == 1 && cells[column][row] == 1) {
+				if (playerMove == 1 && cells[column][row] == 1 && twoPlayer_state == 1 && vsAi_state == 0) {
 					cellColor = true;
 					draw.repaint();
 					if ((column + 1) <= 7 && (row + 1) <= 7) {
@@ -167,17 +176,93 @@ public class Main implements MouseListener, ActionListener{
 					}
 					
 					if (forwardRight == true || forwardLeft == true || forwardRightJump == true || forwardLeftJump == true) {
-						moveCounter = 1;
+						if (forwardRightJump == true || forwardLeftJump == true) {
+							forwardRight = false;
+							forwardLeft = false;
+							moveCounter = 1;
+						}
+						else if (forwardRightJump == false && forwardLeftJump == false) {
+							moveCounter = 1;
+						}
 					}
 					if (forwardRight == false && forwardLeft == false && forwardRightJump == false && forwardLeftJump == false) {
 						moveCounter = 0;
 					}
 						
 				}
+				else if (playerMove == 1 && cells[column][row] == 3 && twoPlayer_state == 1 && vsAi_state == 0) {
+					cellColor = true;
+					draw.repaint();
+					if ((column + 1) <= 7 && (row + 1) <= 7) {
+						if (cells[column + 1][row + 1] == 0) {
+							forwardRight = true;
+							draw.repaint();
+						}	
+					}
+					if ((column + 1) <= 7 && (row - 1) >= 0) {
+						if (cells[column +1][row -1] == 0) {
+							backwardRight = true;
+							draw.repaint();
+						}
+					}
+					if ((column - 1) >= 0 && (row + 1) <= 7) {
+						if (cells[column - 1][row + 1] == 0) {
+							forwardLeft = true;
+							draw.repaint();
+						}
+					}
+					if ((column - 1) >= 0 && (row - 1) >= 0) {
+						if (cells[column - 1][row -1] == 0) {
+							backwardLeft = true;
+							draw.repaint();
+						}
+					}
+					if ((column + 2) <= 7 && (row + 2) <= 7) {
+						if (cells[column + 1][row + 1] == 2 && cells[column + 2][row + 2] == 0) {
+							forwardRightJump = true;
+							draw.repaint();
+						}
+					}
+					if ((column + 2) <= 7 && (row - 2) >= 0) {
+						if (cells[column + 1][row - 1] == 2 && cells[column + 2][row - 2] == 0) {
+							backwardRightJump = true;
+							draw.repaint();
+						}
+					}
+					if ((column - 2) >= 0 && (row + 2) <= 7) {
+						if (cells[column - 1][row + 1] == 2 && cells[column - 2][row + 2] == 0) {
+							forwardLeftJump = true;
+							draw.repaint();
+						}
+					}
+					if ((column - 2) >= 0 && (row - 2) >= 0) {
+						if (cells[column - 1][row - 1] == 2 && cells[column - 2][row - 2] == 0) {
+							backwardLeftJump = true;
+							draw.repaint();
+						}
+					}
+					if (forwardRight == true || forwardLeft == true || forwardRightJump == true || forwardLeftJump == true || 
+							backwardRight == true || backwardLeft == true || backwardRightJump == true || backwardLeftJump == true) {
+						if (forwardRightJump == true || forwardLeftJump == true || backwardRightJump == true || backwardLeftJump == true) {
+							forwardRight = false;
+							forwardLeft = false;
+							backwardLeft = false;
+							backwardRight = false;
+							moveCounter = 1;
+						}
+						else if (forwardRightJump == false && forwardLeftJump == false && backwardRightJump == false && backwardLeftJump == false) {
+							moveCounter = 1;
+						}
+					}
+					if (forwardRight == false && forwardLeft == false && forwardRightJump == false && forwardLeftJump == false &&
+							backwardRight == false && backwardLeft == false && backwardRightJump == false && backwardLeftJump == false) {
+						moveCounter = 0;
+					}
+				}
 				else if (playerMove == 2 && vsAi_state == 1 && twoPlayer_state == 0) {
 					aiPlayer();
 				}
-				else if (playerMove == 2 && cells[column][row] == 2) {
+				else if (playerMove == 2 && cells[column][row] == 2 && twoPlayer_state == 1 && vsAi_state == 0) {
 					cellColor = true;
 					draw.repaint();
 					if ((column + 1) <= 7 && (row - 1) >= 0) {
@@ -205,9 +290,85 @@ public class Main implements MouseListener, ActionListener{
 						}
 					}
 					if (twoForwardRight == true || twoForwardLeft == true || twoForwardRightJump == true || twoForwardLeftJump == true) {
-						moveCounter = 1;
+						if (twoForwardRightJump == true || twoForwardLeftJump == true) {
+							twoForwardRight = false;
+							twoForwardLeft = false;
+							moveCounter = 1;
+						}
+						else if (twoForwardRightJump == false && twoForwardLeftJump == false) {
+							moveCounter = 1;
+						}
 					}
 					if (twoForwardRight == false && twoForwardLeft == false && twoForwardRightJump == false && twoForwardLeftJump == false) {
+						moveCounter = 0;
+					}
+				}
+				else if (playerMove == 2 && cells[column][row] == 4 && twoPlayer_state == 1 && vsAi_state == 0) {
+					cellColor = true;
+					draw.repaint();
+					if ((column + 1) <= 7 && (row + 1) <= 7) {
+						if (cells[column + 1][row + 1] == 0) {
+							twoForwardRight = true;
+							draw.repaint();
+						}	
+					}
+					if ((column + 1) <= 7 && (row - 1) >= 0) {
+						if (cells[column +1][row -1] == 0) {
+							twoBackwardRight = true;
+							draw.repaint();
+						}
+					}
+					if ((column - 1) >= 0 && (row + 1) <= 7) {
+						if (cells[column - 1][row + 1] == 0) {
+							twoForwardLeft = true;
+							draw.repaint();
+						}
+					}
+					if ((column - 1) >= 0 && (row - 1) >= 0) {
+						if (cells[column - 1][row -1] == 0) {
+							twoBackwardLeft = true;
+							draw.repaint();
+						}
+					}
+					if ((column + 2) <= 7 && (row + 2) <= 7) {
+						if (cells[column + 1][row + 1] == 1 && cells[column + 2][row + 2] == 0) {
+							twoForwardRightJump = true;
+							draw.repaint();
+						}
+					}
+					if ((column + 2) <= 7 && (row - 2) >= 0) {
+						if (cells[column + 1][row - 1] == 1 && cells[column + 2][row - 2] == 0) {
+							twoBackwardRightJump = true;
+							draw.repaint();
+						}
+					}
+					if ((column - 2) >= 0 && (row + 2) <= 7) {
+						if (cells[column - 1][row + 1] == 1 && cells[column - 2][row + 2] == 0) {
+							twoForwardLeftJump = true;
+							draw.repaint();
+						}
+					}
+					if ((column - 2) >= 0 && (row - 2) >= 0) {
+						if (cells[column - 1][row - 1] == 1 && cells[column - 2][row - 2] == 0) {
+							twoBackwardLeftJump = true;
+							draw.repaint();
+						}
+					}
+					if (twoForwardRight == true || twoForwardLeft == true || twoForwardRightJump == true || twoForwardLeftJump == true || 
+							twoBackwardRight == true || twoBackwardLeft == true || twoBackwardRightJump == true || twoBackwardLeftJump == true) {
+						if (twoForwardRightJump == true || twoForwardLeftJump == true || twoBackwardRightJump == true || twoBackwardLeftJump == true) {
+							twoForwardRight = false;
+							twoForwardLeft = false;
+							twoBackwardLeft = false;
+							twoBackwardRight = false;
+							moveCounter = 1;
+						}
+						else if (twoForwardRightJump == false && twoForwardLeftJump == false && twoBackwardRightJump == false && twoBackwardLeftJump == false) {
+							moveCounter = 1;
+						}
+					}
+					if (twoForwardRight == false && twoForwardLeft == false && twoForwardRightJump == false && twoForwardLeftJump == false &&
+							twoBackwardRight == false && twoBackwardLeft == false && twoBackwardRightJump == false && twoBackwardLeftJump == false) {
 						moveCounter = 0;
 					}
 				}
@@ -221,23 +382,23 @@ public class Main implements MouseListener, ActionListener{
 			secondColumn = Math.min(cells[0].length, (int)((event.getX() - 30)/ width));
 			secondRow = Math.min(cells.length , (int)((event.getY() - 30)/ height));
 			if (cells[secondColumn][secondRow] == 0) {
-				if (playerMove == 1 && (forwardRight == true || forwardLeft == true || forwardRightJump == true || forwardLeftJump == true)) {
+				if (playerMove == 1 && cells[column][row] == 1 && (forwardRight == true || forwardLeft == true || forwardRightJump == true || forwardLeftJump == true) && twoPlayer_state == 1 && vsAi_state == 0) {
 					if ((column + 1) <= 7 && (row + 1) <= 7) {
-						if (secondColumn == column + 1 && secondRow == row + 1) {
+						if (secondColumn == column + 1 && secondRow == row + 1 && forwardRight == true) {
 							cells[column][row] = 0;
 							cells[column + 1][row + 1] = 1;
 							//kingStatus();
 						}
 					}
 					if ((column - 1) >= 0 && (row + 1) <= 7) {
-						if (secondColumn == column - 1 && secondRow == row + 1) {
+						if (secondColumn == column - 1 && secondRow == row + 1 && forwardLeft == true) {
 							cells[column][row] = 0;
 							cells[column - 1][row + 1] = 1;
 							//kingStatus();
 						}
 					}
 					if ((column + 2) <= 7 && (row + 2) <= 7) {
-						if (secondColumn == column + 2 && secondRow == row + 2) {
+						if (secondColumn == column + 2 && secondRow == row + 2 && forwardRightJump == true) {
 							cells[column][row] = 0;
 							cells[column + 2][row + 2] = 1;
 							cells[column + 1][row + 1] = 0;
@@ -245,14 +406,14 @@ public class Main implements MouseListener, ActionListener{
 						}
 					}
 					if ((column - 2) >= 0 && (row + 2) <= 7) {
-						if (secondColumn == column - 2 && secondRow == row + 2) {
+						if (secondColumn == column - 2 && secondRow == row + 2 && forwardLeftJump == true) {
 							cells[column][row] = 0;
 							cells[column - 2][row + 2] = 1;
 							cells[column - 1][row + 1] = 0;
 							//kingStatus();
 						}
 					}
-					if ((secondColumn == column - 1 && secondRow == row + 1) || (secondColumn == column + 1 && secondRow == row + 1) || (secondColumn == column + 2 && secondRow == row + 2) || (secondColumn == column - 2 && secondRow == row + 2)) {
+					if ((secondColumn == column - 1 && secondRow == row + 1 && forwardLeft == true) || (secondColumn == column + 1 && secondRow == row + 1 && forwardRight == true) || (secondColumn == column + 2 && secondRow == row + 2) && forwardRightJump == true || (secondColumn == column - 2 && secondRow == row + 2 && forwardLeftJump == true)) {
 						cellColor = false;
 						forwardRight = false;
 						forwardLeft = false;
@@ -261,8 +422,10 @@ public class Main implements MouseListener, ActionListener{
 						playerMove = 2;
 						moveCounter = 0;
 						draw.repaint();
+						checkWin();
+						kingStatus();
 					}
-					else if (!(secondColumn == column - 1 && secondRow == row + 1) && !(secondColumn == column + 1 && secondRow == row + 1) && !(secondColumn == column + 2 && secondRow == row + 2) && !(secondColumn == column - 2 && secondRow == row + 2)) {
+					else if (!(secondColumn == column - 1 && secondRow == row + 1 && forwardLeft == true) && !(secondColumn == column + 1 && secondRow == row + 1 && forwardRight == true) && !(secondColumn == column + 2 && secondRow == row + 2 && forwardRightJump == true) && !(secondColumn == column - 2 && secondRow == row + 2 && forwardLeftJump == true)) {
 						cellColor = false;
 						forwardRight = false;
 						forwardLeft = false;
@@ -271,25 +434,121 @@ public class Main implements MouseListener, ActionListener{
 						playerMove = 1;
 						moveCounter = 0;
 						draw.repaint();
+						checkWin();
+						kingStatus();
 					}
 				}
-				else if (playerMove == 2 && (twoForwardRight == true || twoForwardLeft == true || twoForwardRightJump == true || twoForwardLeftJump == true)) {
+				else if (playerMove == 1 && cells[column][row] == 3 && (forwardRight == true || forwardLeft == true || forwardRightJump == true || forwardLeftJump == true || backwardRight == true || backwardLeft == true || backwardLeftJump == true || backwardRightJump == true) && twoPlayer_state == 1 && vsAi_state == 0) {
+					if ((column + 1) <= 7 && (row + 1) <= 7) {
+						if (secondColumn == column + 1 && secondRow == row + 1 && forwardRight == true) {
+							cells[column][row] = 0;
+							cells[column + 1][row + 1] = 3;
+							//kingStatus();
+						}
+					}
+					if ((column + 1) <= 7 && (row - 1) >= 0) {
+						if (secondColumn == column + 1 && secondRow == row - 1 && backwardRight == true) {
+							cells[column][row] = 0;
+							cells[column + 1][row - 1] = 3;
+							//kingStatus();
+						}
+					}
+					if ((column - 1) >= 0 && (row + 1) <= 7) {
+						if (secondColumn == column - 1 && secondRow == row + 1 && forwardLeft == true) {
+							cells[column][row] = 0;
+							cells[column - 1][row + 1] = 3;
+							//kingStatus();
+						}
+					}
+					if ((column - 1) >= 0 && (row - 1) >= 0) {
+						if (secondColumn == column - 1 && secondRow == row - 1 && backwardLeft == true) {
+							cells[column][row] = 0;
+							cells[column - 1][row - 1] = 3;
+							//kingStatus();
+						}
+					}
+					if ((column + 2) <= 7 && (row + 2) <= 7) {
+						if (secondColumn == column + 2 && secondRow == row + 2 && forwardRightJump == true) {
+							cells[column][row] = 0;
+							cells[column + 2][row + 2] = 3;
+							cells[column + 1][row + 1] = 0;
+							//kingStatus();
+						}
+					}
+					if ((column + 2) <= 7 && (row - 2) >= 0) {
+						if (secondColumn == column + 2 && secondRow == row - 2 && backwardRightJump == true) {
+							cells[column][row] = 0;
+							cells[column + 2][row - 2] = 3;
+							cells[column + 1][row - 1] = 0;
+							//kingStatus();
+						}
+					}
+					if ((column - 2) >= 0 && (row + 2) <= 7) {
+						if (secondColumn == column - 2 && secondRow == row + 2 && forwardLeftJump == true) {
+							cells[column][row] = 0;
+							cells[column - 2][row + 2] = 3;
+							cells[column - 1][row + 1] = 0;
+							//kingStatus();
+						}
+					}
+					if ((column - 2) >= 0 && (row - 2) >= 0) {
+						if (secondColumn == column - 2 && secondRow == row - 2 && backwardLeftJump == true) {
+							cells[column][row] = 0;
+							cells[column - 2][row - 2] = 3;
+							cells[column - 1][row - 1] = 0;
+							//kingStatus();
+						}
+					}
+					if ((secondColumn == column - 1 && secondRow == row + 1 && forwardLeft == true) || (secondColumn == column + 1 && secondRow == row + 1 && forwardRight == true) || (secondColumn == column + 2 && secondRow == row + 2) && forwardRightJump == true || (secondColumn == column - 2 && secondRow == row + 2 && forwardLeftJump == true) &&
+							(secondColumn == column - 1 && secondRow == row - 1 && backwardLeft == true) || (secondColumn == column + 1 && secondRow == row - 1 && backwardRight == true) || (secondColumn == column + 2 && secondRow == row - 2) && backwardRightJump == true || (secondColumn == column - 2 && secondRow == row - 2 && backwardLeftJump == true)) {
+						cellColor = false;
+						forwardRight = false;
+						forwardLeft = false;
+						forwardRightJump = false;
+						forwardLeftJump = false;
+						backwardRight = false;
+						backwardLeft = false;
+						backwardRightJump = false;
+						backwardLeftJump = false;
+						playerMove = 2;
+						moveCounter = 0;
+						draw.repaint();
+						checkWin();
+					}
+					else if (!(secondColumn == column - 1 && secondRow == row + 1 && forwardLeft == true) && !(secondColumn == column + 1 && secondRow == row + 1 && forwardRight == true) && !(secondColumn == column + 2 && secondRow == row + 2 && forwardRightJump == true) && !(secondColumn == column - 2 && secondRow == row + 2 && forwardLeftJump == true) && 
+							!(secondColumn == column - 1 && secondRow == row - 1 && backwardLeft == true) && !(secondColumn == column + 1 && secondRow == row - 1 && backwardRight == true) && !(secondColumn == column + 2 && secondRow == row - 2 && backwardRightJump == true) && !(secondColumn == column - 2 && secondRow == row - 2 && backwardLeftJump == true)) {
+						cellColor = false;
+						forwardRight = false;
+						forwardLeft = false;
+						forwardRightJump = false;
+						forwardLeftJump = false;
+						backwardRight = false;
+						backwardLeft = false;
+						backwardRightJump = false;
+						backwardLeftJump = false;
+						playerMove = 1;
+						moveCounter = 0;
+						draw.repaint();
+						checkWin();
+					}
+				}
+				else if (playerMove == 2 && cells[column][row] == 2&&(twoForwardRight == true || twoForwardLeft == true || twoForwardRightJump == true || twoForwardLeftJump == true) && twoPlayer_state == 1 && vsAi_state == 0) {
 					if ((column + 1) <= 7 && (row - 1) >= 0)	{
-						if (secondColumn == column + 1 && secondRow == row - 1) {
+						if (secondColumn == column + 1 && secondRow == row - 1 && twoForwardRight == true) {
 							cells[column][row] = 0;
 							cells[column + 1][row - 1] = 2;
 							//kingStatus();
 						}
 					}
 					if ((column - 1) >= 0 && (row - 1) >= 0)	{
-						if (secondColumn == column - 1 && secondRow == row - 1) {
+						if (secondColumn == column - 1 && secondRow == row - 1 && twoForwardLeft == true) {
 							cells[column][row] = 0;
 							cells[column - 1][row - 1] = 2;
 							//kingStatus();
 						}
 					}
 					if ((column + 2) <= 7 && (row - 2) >= 0) {
-						if (secondColumn == column + 2 && secondRow == row - 2) {
+						if (secondColumn == column + 2 && secondRow == row - 2 && twoForwardRightJump == true) {
 							cells[column][row] = 0;
 							cells[column + 2][row - 2] = 2;
 							cells[column + 1][row - 1] = 0;
@@ -297,14 +556,15 @@ public class Main implements MouseListener, ActionListener{
 						}
 					}
 					if ((column - 2) >= 0 && (row - 2) >= 0) {
-						if (secondColumn == column - 2 && secondRow == row - 2) {
+						if (secondColumn == column - 2 && secondRow == row - 2 && twoForwardLeftJump == true) {
 							cells[column][row] = 0;
 							cells[column - 2][row - 2] = 2;
 							cells[column - 1][row - 1] = 0;
+							System.out.println("I'm here");
 							//kingStatus();
 						}
 					}
-					if ((secondColumn == column + 1 && secondRow == row - 1) || (secondColumn == column - 1 && secondRow == row - 1) || (secondColumn == column + 2 && secondRow == row - 2) || (secondColumn == column - 2 && secondRow == row - 2)) {
+					if ((secondColumn == column + 1 && secondRow == row - 1 && twoForwardRight == true) || (secondColumn == column - 1 && secondRow == row - 1 && twoForwardLeft == true) || (secondColumn == column + 2 && secondRow == row - 2 && twoForwardRightJump == true) || (secondColumn == column - 2 && secondRow == row - 2 && twoForwardLeftJump == true)) {
 						cellColor = false;
 						twoForwardRight = false;
 						twoForwardLeft = false;
@@ -313,8 +573,10 @@ public class Main implements MouseListener, ActionListener{
 						playerMove = 1;
 						moveCounter = 0;
 						draw.repaint();
+						checkWin();
+						kingStatus();
 					}
-					else if (!(secondColumn == column + 1 && secondRow == row - 1) && !(secondColumn == column - 1 && secondRow == row - 1) && !(secondColumn == column + 2 && secondRow == row - 2) && !(secondColumn == column - 2 && secondRow == row - 2)) {
+					else if (!(secondColumn == column + 1 && secondRow == row - 1 && twoForwardRight == true) && !(secondColumn == column - 1 && secondRow == row - 1 && twoForwardLeft == true) && !(secondColumn == column + 2 && secondRow == row - 2 && twoForwardRightJump == true) && !(secondColumn == column - 2 && secondRow == row - 2 && twoForwardLeftJump == true)) {
 						cellColor = false;
 						twoForwardRight = false;
 						twoForwardLeft = false;
@@ -323,6 +585,102 @@ public class Main implements MouseListener, ActionListener{
 						playerMove = 2;
 						moveCounter = 0;
 						draw.repaint();
+						checkWin();
+						kingStatus();
+					}
+				}
+				else if (playerMove == 2 && cells[column][row] == 4 && (twoForwardRight == true || twoForwardLeft == true || twoForwardRightJump == true || twoForwardLeftJump == true || twoBackwardRight == true || twoBackwardLeft == true || twoBackwardLeftJump == true || twoBackwardRightJump == true) && twoPlayer_state == 1 && vsAi_state == 0) {
+					if ((column + 1) <= 7 && (row + 1) <= 7) {
+						if (secondColumn == column + 1 && secondRow == row + 1 && twoForwardRight == true) {
+							cells[column][row] = 0;
+							cells[column + 1][row + 1] = 4;
+							//kingStatus();
+						}
+					}
+					if ((column + 1) <= 7 && (row - 1) >= 0) {
+						if (secondColumn == column + 1 && secondRow == row - 1 && twoBackwardRight == true) {
+							cells[column][row] = 0;
+							cells[column + 1][row - 1] = 4;
+							//kingStatus();
+						}
+					}
+					if ((column - 1) >= 0 && (row + 1) <= 7) {
+						if (secondColumn == column - 1 && secondRow == row + 1 && twoForwardLeft == true) {
+							cells[column][row] = 0;
+							cells[column - 1][row + 1] = 4;
+							//kingStatus();
+						}
+					}
+					if ((column - 1) >= 0 && (row - 1) >= 0) {
+						if (secondColumn == column - 1 && secondRow == row - 1 && twoBackwardLeft == true) {
+							cells[column][row] = 0;
+							cells[column - 1][row - 1] = 4;
+							//kingStatus();
+						}
+					}
+					if ((column + 2) <= 7 && (row + 2) <= 7) {
+						if (secondColumn == column + 2 && secondRow == row + 2 && twoForwardRightJump == true) {
+							cells[column][row] = 0;
+							cells[column + 2][row + 2] = 4;
+							cells[column + 1][row + 1] = 0;
+							//kingStatus();
+						}
+					}
+					if ((column + 2) <= 7 && (row - 2) >= 0) {
+						if (secondColumn == column + 2 && secondRow == row - 2 && twoBackwardRightJump == true) {
+							cells[column][row] = 0;
+							cells[column + 2][row - 2] = 4;
+							cells[column + 1][row - 1] = 0;
+							//kingStatus();
+						}
+					}
+					if ((column - 2) >= 0 && (row + 2) <= 7) {
+						if (secondColumn == column - 2 && secondRow == row + 2 && twoForwardLeftJump == true) {
+							cells[column][row] = 0;
+							cells[column - 2][row + 2] = 4;
+							cells[column - 1][row + 1] = 0;
+							//kingStatus();
+						}
+					}
+					if ((column - 2) >= 0 && (row - 2) >= 0) {
+						if (secondColumn == column - 2 && secondRow == row - 2 && twoBackwardLeftJump == true) {
+							cells[column][row] = 0;
+							cells[column - 2][row - 2] = 4;
+							cells[column - 1][row - 1] = 0;
+							//kingStatus();
+						}
+					}
+					if ((secondColumn == column - 1 && secondRow == row + 1 && twoForwardLeft == true) || (secondColumn == column + 1 && secondRow == row + 1 && twoForwardRight == true) || (secondColumn == column + 2 && secondRow == row + 2) && twoForwardRightJump == true || (secondColumn == column - 2 && secondRow == row + 2 && twoForwardLeftJump == true) &&
+							(secondColumn == column - 1 && secondRow == row - 1 && twoBackwardLeft == true) || (secondColumn == column + 1 && secondRow == row - 1 && twoBackwardRight == true) || (secondColumn == column + 2 && secondRow == row - 2) && twoBackwardRightJump == true || (secondColumn == column - 2 && secondRow == row - 2 && twoBackwardLeftJump == true)) {
+						cellColor = false;
+						twoForwardRight = false;
+						twoForwardLeft = false;
+						twoForwardRightJump = false;
+						twoForwardLeftJump = false;
+						twoBackwardRight = false;
+						twoBackwardLeft = false;
+						twoBackwardRightJump = false;
+						twoBackwardLeftJump = false;
+						playerMove = 2;
+						moveCounter = 0;
+						draw.repaint();
+						checkWin();
+					}
+					else if (!(secondColumn == column - 1 && secondRow == row + 1 && twoForwardLeft == true) && !(secondColumn == column + 1 && secondRow == row + 1 && twoForwardRight == true) && !(secondColumn == column + 2 && secondRow == row + 2 && twoForwardRightJump == true) && !(secondColumn == column - 2 && secondRow == row + 2 && twoForwardLeftJump == true) && 
+							!(secondColumn == column - 1 && secondRow == row - 1 && twoBackwardLeft == true) && !(secondColumn == column + 1 && secondRow == row - 1 && twoBackwardRight == true) && !(secondColumn == column + 2 && secondRow == row - 2 && twoBackwardRightJump == true) && !(secondColumn == column - 2 && secondRow == row - 2 && twoBackwardLeftJump == true)) {
+						cellColor = false;
+						twoForwardRight = false;
+						twoForwardLeft = false;
+						twoForwardRightJump = false;
+						twoForwardLeftJump = false;
+						twoBackwardRight = false;
+						twoBackwardLeft = false;
+						twoBackwardRightJump = false;
+						twoBackwardLeftJump = false;
+						playerMove = 1;
+						moveCounter = 0;
+						draw.repaint();
+						checkWin();
 					}
 				}
 			}
@@ -372,11 +730,12 @@ public class Main implements MouseListener, ActionListener{
 			for (int j = 0; j < 8; j++) {
 				for (int j2 = 0; j2 < 12; j2++) {
 					if (cells[i][j] == CPieces.onepieces[j2] && j == 7) {
-						//CPieces.onepieces[j2] = 3;
+						CPieces.onepieces[j2] = 3;
 						cells[i][j] = 3;
+						System.out.println("king");
 					}
-					if (cells[i][j] == CPieces.twopieces[j2] && j < 2 && j > 0) {
-						//CPieces.twopieces[j2] = 4;
+					if (cells[i][j] == CPieces.twopieces[j2] && j == 0) {
+						CPieces.twopieces[j2] = 4;
 						cells[i][j] = 4;
 						System.out.println("working?");
 					}
@@ -386,33 +745,37 @@ public class Main implements MouseListener, ActionListener{
 	}
 	
 	public void checkWin() {
-		if (playerMove == 2) {
+		if (playerMove == 2 || playerMove == 1) {
 			for (int i = 0; i < cells.length; i++) {
 				for (int j = 0; j < cells.length; j++) {
 					if (cells[i][j] == 2 || cells[i][j] == 4) {
-						piecesCounter++;
-						if (piecesCounter >= 1) {
-							//player two wins!!!!!!!!!!!!!!!!!!!!
-							piecesCounter = 0;
-						}
+						twoPiecesCounter++;
+					}
+					else if (cells[i][j] == 1 || cells[i][j] == 3) {
+						piecesCounter++;}
 					}
 				}
 			}
-		}
-		if (playerMove == 1) {
-			for (int i = 0; i < cells.length; i++) {
-				for (int j = 0; j < cells.length; j++) {
-					if (cells[i][j] == 1 || cells[i][j] == 3) {
-						piecesCounter++;
-						if (piecesCounter >= 1) {
-							//player one wins!!!!!!!!!!!!!!!!!!!!
-							piecesCounter = 0;
-						}
-					}
-				}
+			if (twoPiecesCounter == 0) {
+				//player one wins!!!!!!!!!!!!!!!!!!!!
+				twoPiecesCounter = 0;
+				info.setText("Player One Wins. Game Over.");
+				twoPlayer.setBackground(Color.LIGHT_GRAY);
+				twoPlayer.setOpaque(true);
+				twoPlayer_state = 0;
+				frame.repaint();
+			}
+			else if (piecesCounter == 0) {
+				//player two wins!!!!!!!!!!!!!!!!!!!!
+				piecesCounter = 0;
+				info.setText("Player Two Wins. Game Over.");
+				twoPlayer.setBackground(Color.LIGHT_GRAY);
+				twoPlayer.setOpaque(true);
+				twoPlayer_state = 0;
+				frame.repaint();
 			}
 		}
-	}
+	
 	
 	public void aiPlayer() {
 		aiBlock();
