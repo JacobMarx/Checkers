@@ -1,25 +1,24 @@
-
+/* This class sets the appropriate pieces for the Checkers game
+ * Date: June 13, 2018
+ * Authors: Jacob Marx and Vivek Kumar
+ * Supervisor: Jason Galbraith
+ */
 public class CPieces{
 	
-	public static int[] twopieces = new int[12];
+	//Create arrays for both sets of pieces
+	public static int[] twopieces = new int[12]; 
 	public static int[] onepieces = new int[12];
-	//public static int[][] board = new int[8][8];
-
-	
-	/*public CPieces() {
-		startup();
-		
-		
-	}*/
 	
 	public CPieces() {
 		
+		//First, set all of the pieces to empty
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				Main.cells[i][j] = 0;
 			}
 		}
 		
+		//Second, set all the white rectangles to 9, to ensure a piece never moves there
 		for (int i = 0; i < 8; i = i + 2) {
 			for (int j = 0; j < 8; j = j + 2) {
 				Main.cells[i][j] = 9;
@@ -32,11 +31,12 @@ public class CPieces{
 			}
 		}
 		
+		//Third, set all the Player 1 Pieces to 1 and Player 2 Pieces to 2
 		for (int i = 0; i < 12; i++) {
 			onepieces[i] = 1;
 			twopieces[i] = 2;
 		}
-		
+		//Set the pieces based on the starting set-up of the game
 		Main.cells[1][0] = onepieces[0];
 		Main.cells[3][0] = onepieces[1];
 		Main.cells[5][0] = onepieces[2];
@@ -62,9 +62,5 @@ public class CPieces{
 		Main.cells[2][7] = twopieces[9];
 		Main.cells[4][7] = twopieces[10];
 		Main.cells[6][7] = twopieces[11];
-		
 	}
-	
-	
-
 }
