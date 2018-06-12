@@ -76,7 +76,7 @@ public class Main implements MouseListener, ActionListener{
 	//JButton start = new JButton("Start");
 	//JButton end = new JButton("End");
 	//JButton reset = new JButton("Reset");
-	JLabel info = new JLabel("Welcome to Checkers");
+	JLabel info = new JLabel("Welcome to Checkers          ");
 	
 	public Main() {//Crate frame set up for the checkers game
 		frame.setSize(800,800);
