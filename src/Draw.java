@@ -17,6 +17,55 @@ public class Draw extends JPanel{
 	public void paintComponent(Graphics g) {//Draws the board + pieces for the game
 		super.paintComponent(g);
 		
+		
+		if (Main.twoForwardLeftAI == true) {
+			g.setColor(Color.PINK);
+			g.drawRect(((Main.columnAI - 1) * 70) + 30, ((Main.rowAI - 1) * 70) + 30, 70, 70);
+			g.drawRect(((Main.columnAI - 1) * 70) + 30, ((Main.rowAI - 1) * 70) + 30, 69, 69);
+			g.drawRect(((Main.columnAI - 1) * 70) + 30, ((Main.rowAI - 1) * 70) + 30, 68, 68);
+		}
+		if (Main.twoForwardRightAI == true) {
+			g.setColor(Color.PINK);
+			g.drawRect(((Main.columnAI + 1) * 70) + 30, ((Main.rowAI - 1) * 70) + 30, 70, 70);
+			g.drawRect(((Main.columnAI + 1) * 70) + 30, ((Main.rowAI - 1) * 70) + 30, 69, 69);
+			g.drawRect(((Main.columnAI + 1) * 70) + 30, ((Main.rowAI - 1) * 70) + 30, 68, 68);
+		}
+		if (Main.twoForwardLeftJumpAI == true) {
+			g.setColor(Color.PINK);
+			g.drawRect(((Main.columnAI - 2) * 70) + 30, ((Main.rowAI - 2) * 70) + 30, 70, 70);
+			g.drawRect(((Main.columnAI - 2) * 70) + 30, ((Main.rowAI - 2) * 70) + 30, 69, 69);
+			g.drawRect(((Main.columnAI - 2) * 70) + 30, ((Main.rowAI - 2) * 70) + 30, 68, 68);
+		}
+		if (Main.twoForwardRightJumpAI == true) {
+			g.setColor(Color.PINK);
+			g.drawRect(((Main.columnAI + 2) * 70) + 30, ((Main.rowAI - 2) * 70) + 30, 70, 70);
+			g.drawRect(((Main.columnAI + 2) * 70) + 30, ((Main.rowAI - 2) * 70) + 30, 69, 69);
+			g.drawRect(((Main.columnAI + 2) * 70) + 30, ((Main.rowAI - 2) * 70) + 30, 68, 68);
+		}
+		if (Main.twoBackwardLeftJumpAI == true) {
+			g.setColor(Color.PINK);
+			g.drawRect(((Main.column - 2) * 70) + 30, ((Main.row + 2) * 70) + 30, 70, 70);
+			g.drawRect(((Main.column - 2) * 70) + 30, ((Main.row + 2) * 70) + 30, 69, 69);
+			g.drawRect(((Main.column - 2) * 70) + 30, ((Main.row + 2) * 70) + 30, 68, 68);
+		}
+		if (Main.twoBackwardRightJumpAI == true) {
+			g.setColor(Color.PINK);
+			g.drawRect(((Main.column + 2) * 70) + 30, ((Main.row + 2) * 70) + 30, 70, 70);
+			g.drawRect(((Main.column + 2) * 70) + 30, ((Main.row + 2) * 70) + 30, 69, 69);
+			g.drawRect(((Main.column + 2) * 70) + 30, ((Main.row + 2) * 70) + 30, 68, 68);
+		}
+		if (Main.twoBackwardLeftAI == true) {
+			g.setColor(Color.PINK);
+			g.drawRect(((Main.column - 1) * 70) + 30, ((Main.row + 1) * 70) + 30, 70, 70);
+			g.drawRect(((Main.column - 1) * 70) + 30, ((Main.row + 1) * 70) + 30, 69, 69);
+			g.drawRect(((Main.column - 1) * 70) + 30, ((Main.row + 1) * 70) + 30, 68, 68);
+		}
+		if (Main.twoBackwardRightAI == true) {
+			g.setColor(Color.PINK);
+			g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row + 1) * 70) + 30, 70, 70);
+			g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row + 1) * 70) + 30, 69, 69);
+			g.drawRect(((Main.column + 1) * 70) + 30, ((Main.row + 1) * 70) + 30, 68, 68);
+		}
 		//Checker board
 		//creates white backboard for checker board
 		g.setColor(Color.WHITE); 
