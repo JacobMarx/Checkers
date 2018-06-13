@@ -50,6 +50,9 @@ public class Main implements MouseListener, ActionListener{
 	public static boolean twoBackwardRightAI = false;
 	public static boolean twoBackwardLeftJumpAI = false;
 	public static boolean twoBackwardRightJumpAI = false;
+	public static boolean cellColorJump = false;
+	public static int columnJump;
+	public static int rowJump;
 	public static boolean playMade = false;
 	public static int column;
 	public static int row;
@@ -336,7 +339,7 @@ public class Main implements MouseListener, ActionListener{
 			checkWin();
 		}
 	}
-
+	
 	public void playerOneKingHighlight () {
 		cellColor = true;
 		draw.repaint();
@@ -612,7 +615,7 @@ public class Main implements MouseListener, ActionListener{
 			kingStatus();
 		}
 	}
-
+	
 	public void playerOneNormalMoveAI () {
 		if ((column + 1) <= 7 && (row + 1) <= 7) { 
 			if (secondColumn == column + 1 && secondRow == row + 1 && forwardRight == true) { //clicked move is a possible move

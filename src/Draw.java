@@ -17,7 +17,12 @@ public class Draw extends JPanel{
 	public void paintComponent(Graphics g) {//Draws the board + pieces for the game
 		super.paintComponent(g);
 		
-		
+		if (Main.cellColorJump == true) {
+			g.setColor(Color.GREEN);
+			g.drawRect((Main.columnJump * 70) + 30, (Main.rowJump * 70) + 30, 70, 70);
+			g.drawRect((Main.columnJump * 70) + 30, (Main.rowJump * 70) + 30, 69, 69);
+			g.drawRect((Main.columnJump * 70) + 30, (Main.rowJump * 70) + 30, 68, 68);
+		}
 		if (Main.twoForwardLeftAI == true) {
 			g.setColor(Color.PINK);
 			g.drawRect(((Main.columnAI - 1) * 70) + 30, ((Main.rowAI - 1) * 70) + 30, 70, 70);
