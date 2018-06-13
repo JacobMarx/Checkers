@@ -1362,6 +1362,33 @@ public class Main implements MouseListener, ActionListener{
 				cells[2][7] = CPieces.twopieces[9];
 				cells[4][7] = CPieces.twopieces[10];
 				cells[6][7] = CPieces.twopieces[11];
+				
+				cellColor = false;
+				forwardRight = false;
+				forwardLeft = false;
+				forwardRightJump = false;
+				forwardLeftJump = false;
+				backwardRight = false;
+				backwardLeft = false;
+				backwardRightJump = false;
+				backwardLeftJump = false;
+				twoForwardRight = false;
+				twoForwardLeft = false;
+				twoForwardRightJump = false;
+				twoForwardLeftJump = false;
+				twoBackwardRight = false;
+				twoBackwardLeft = false;
+				twoBackwardRightJump = false;
+				twoBackwardLeftJump = false;
+				twoForwardLeftAI = false;
+				twoForwardRightAI = false;
+				twoForwardLeftJumpAI = false;
+				twoForwardRightJumpAI = false;
+				twoBackwardLeftAI = false;
+				twoBackwardRightAI = false;
+				twoBackwardLeftJumpAI = false;
+				twoBackwardRightJumpAI = false;
+				cellColorJump = false;
 		}
 	
 	public static void main(String[] args) {
