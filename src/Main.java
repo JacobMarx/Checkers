@@ -94,7 +94,7 @@ public class Main implements MouseListener, ActionListener{
 	JButton reset = new JButton("Reset");
 	JLabel info = new JLabel("Welcome to Checkers          ");
 	
-	public Main() {//Crate frame set up for the checkers game
+	public Main() {//Create frame set up for the checkers game
 		frame.setSize(1000,800);
 		frame.setLayout(new BorderLayout());
 		
@@ -1084,8 +1084,8 @@ public class Main implements MouseListener, ActionListener{
 	}
 	
 	public void aiPlayer() { // make AI player moves
-	//	aiBlock();
-	//	aiMove();
+		aiBlock();
+		aiMove();
 	}
 	
 	public void aiBlock() { // AI will attempt to make a block first
@@ -1274,43 +1274,8 @@ public class Main implements MouseListener, ActionListener{
 			}
 		}
 	}					
-				/*if (cells[i][j] == 2 && (i + 1) <= 7 && (j + 1) <= 7 && (i - 1) >= 0 && (j - 1) >= 0) {
-					if (cells[i + 1][j - 1] == 0) { //forward right
-						cells[i][j] = 0;
-						cells[i + 1][j - 1] = 2;
-						draw.repaint();
-						playerMove = 1;
-					}
-					else if (cells[i - 1][j - 1] == 0) { //forward right
-						cells[i][j] = 0;
-						cells[i - 1][j - 1] = 2;
-						draw.repaint();
-						playerMove = 1;
-					}*/
-			
-				/*if (cells[i][j] == 2 && (i - 1) >= 0 && (j + 1) <= 7) {
-					if (cells[i - 1][j + 1] == 0) {
-						cells[i][j] = 0;
-						cells[i - 1][j - 1] = 2;
-						frame.repaint();
-						playerMove = 1;
-					}
-				}*/
-		/*if (cells[i][j] == 2 && (i + 2) <= 7 && (j + 2) <= 7) {
-			if (cells[i + 1][j + 1] == 2 && cells[i + 2][j + 2] == 0) {
-				forwardRightJump = true;
-				draw.repaint();
-			}
-		}
-		if (cells[i][j] == 2 && (i - 2) >= 0 && (j + 2) <= 7) {
-			if (cells[i - 1][j + 1] == 2 && cells[i - 2][j + 2] == 0) {
-				forwardLeftJump = true;
-				draw.repaint();
-			}
-		}*/
 	
-
-	public void reset() {
+	public void reset() { //Reset the game to the initial board
 		//First, set all of the pieces to empty
 				for (int i = 0; i < 8; i++) {
 					for (int j = 0; j < 8; j++) {
